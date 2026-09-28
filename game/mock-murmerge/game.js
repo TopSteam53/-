@@ -403,22 +403,19 @@
   }
   function setupPreset() {
     if (PRESET === 'chain') {
-      // a tower in the left corner: dropping a 3 on top cascades 3+3 -> 4 -> 5 -> 6 -> 7 downwards
+      // staircase down the right wall: dropping a 3 on top cascades 3+3 -> 4 -> 5 -> 6 -> 7 -> 8
       const R = (t) => TIERS[t].r;
-      makeBody(6, JL + R(6), JB - R(6));
-      makeBody(5, JL + R(5), JB - 2 * R(6) - R(5) + 20);
-      makeBody(4, JL + R(4), JB - 2 * R(6) - 2 * R(5) - R(4) + 40);
-      makeBody(3, JL + R(3), JB - 2 * R(6) - 2 * R(5) - 2 * R(4) - R(3) + 60);
-      let x = JL + 2 * R(6) + 2;
-      for (const t of [2, 0]) { makeBody(t, x + R(t), JB - R(t)); x += 2 * R(t); }
-      makeBody(6, JR - R(6), JB - R(6)); // second pink one waiting on the right
-      makeBody(1, JL + 400, JB - 330);
-      makeBody(4, JL + 590, JB - 460);
-      makeBody(0, JL + 770, JB - 400);
-      makeBody(1, JR - 70, JB - 420);
-      makeBody(2, JL + 700, JB - 700);
-      makeBody(1, JL + 470, JB - 600);
-      makeBody(2, JR - 90, JB - 600);
+      makeBody(7, JL + R(7), JB - R(7));
+      makeBody(6, JL + 2 * R(7) + R(6) + 1, JB - R(6));
+      makeBody(5, JR - R(5), JB - 420);
+      makeBody(4, JR - R(4), JB - 660);
+      makeBody(3, JR - R(3), JB - 880);
+      makeBody(0, JL + 90, JB - 440);
+      makeBody(1, JL + 230, JB - 470);
+      makeBody(2, JL + 400, JB - 440);
+      makeBody(0, JL + 560, JB - 420);
+      makeBody(1, JL + 120, JB - 620);
+      makeBody(0, JL + 300, JB - 640);
       queue.push(3, 0, 1, 2, 0, 1, 2);
     } else if (PRESET === 'dense') {
       const R = mulberry32(SEED + 5);
@@ -500,6 +497,8 @@
           } else if (same && mergeEnabled && it === 0 && !bugOn) {
             // gentle "magnet" so same cats find each other (keeps chains flowing)
             const gap = d - rr;
+            // big cats are "sticky": close enough counts as touching (keeps big chains going)
+            if (a.tier >= 5 && gap < a.r * 0.35 && !a.dead && !b.dead && !(OVER && (a.pre || b.pre))) cands.push([a, b]);
             if (gap < a.r * (a.tier >= 5 ? 1.0 : 0.35) && T - a.born > 0.15 && T - b.born > 0.15) {
               const pull = Math.min(gap, 0.5) * (a.tier >= 5 ? 0.9 : 0.5);
               const nx = dx / d, ny = dy / d;
@@ -563,9 +562,10 @@
       if (nt >= 5) { shake = Math.max(shake, 6 + (nt - 4) * 5); }
       if (nt >= 7) flash = Math.max(flash, 0.35);
     }
-    const mult = combo >= 2 ? combo : 1;
+    const mult = Math.min(Math.max(combo, 1), 5);
     pts *= mult;
     score += pts; scoreBump = 1;
+    if (floats.length >= 6) floats.shift();
     floats.push({ x: mx, y: my - Math.min(TIERS[Math.min(nt, 9)].r, 120) * 0.6, text: '+' + pts, t0: T, dur: 1.0, size: 58 + Math.min(nt, 9) * 7, tier: Math.min(nt, 9) });
     if (combo >= 2) comboText = { n: combo, t0: T };
     events.push({ t: +T.toFixed(3), type: 'merge', tier: nt, combo });
@@ -1130,6 +1130,7 @@
   window.__step = (ms) => { advance(ms); render(); return T; };
   window.__grab = (type = 'image/jpeg', q = 0.94) => canvas.toDataURL(type, q);
   window.__state = () => ({ t: T, score, maxTier, cats: bodies.length, gameOver, bugPhase, events: events.slice() });
+  window.__bodies = () => bodies.map((b) => ({ id: b.id, tier: b.tier, x: +b.x.toFixed(1), y: +b.y.toFixed(1), r: +b.r.toFixed(1), rT: b.rT, dead: b.dead, pre: !!b.pre }));
 
   // ---------- realtime + manual play ----------
   if (!RECORD) {
