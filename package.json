@@ -1,0 +1,11 @@
+{
+  "name": "tiktok-zero-to-result",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "record:gameplay": "node pipeline/record_gameplay.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}

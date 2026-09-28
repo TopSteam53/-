@@ -1,0 +1,100 @@
+# «С нуля до результата» — пайплайн TikTok-видео
+
+Программная сборка вертикальных роликов 1080×1920 / 30 fps / H.264: озвучка → субтитры по словам → моушн-графика → музыка и SFX → mp4.
+Всё работает офлайн и без платных API.
+
+| Что | Чем |
+|---|---|
+| Озвучка | Piper (нейросетевой VITS), голос `ru_RU-denis` (датасет CC0), отбор лучшего дубля по ASR |
+| Тайминги слов | GigaAM v2 (sherpa-onnx) + выравнивание по символам |
+| Монтаж и графика | Remotion 4 (React), шрифты Unbounded / Montserrat / JetBrains Mono (OFL) |
+| Музыка и SFX | синтезированы кодом (`pipeline/audio/`) — никаких сэмплов, 0 рисков Content ID |
+| Сведение | numpy: EQ/компрессия голоса, sidechain-приглушение музыки, лимитер, −14 LUFS |
+
+## Быстрый старт
+
+```bash
+bash pipeline/setup.sh                                  # один раз: зависимости + модели (~450 МБ)
+python pipeline/make_episode.py episodes/ep01           # -> output/video_01.mp4
+python pipeline/make_episode.py episodes/ep01 --draft   # быстрый черновик в половинном разрешении
+```
+
+## Новое видео
+
+1. **Записи.** Положи клипы в `footage/` с понятными именами, например `footage/moderation_screen.mp4`, `footage/gameplay_main.mp4`.
+   Файл в `footage/` всегда важнее автоматически записанного `footage/_generated/` с тем же именем.
+   Любой формат и ориентация — пайплайн сам обрежет под 9:16 и 30 fps.
+   *Для ep01 сейчас используются записи макета игры (`game/mock-murmerge`, `npm run record:gameplay`) —
+   положи свои `gameplay_main.mp4`, `gameplay_merge_closeup.mp4`, `gameplay_bug.mp4` в `footage/` и перерендерь.*
+2. **Эпизод.** Скопируй `episodes/ep01` → `episodes/ep02`, поменяй `id`, `episodeNumber` и `lines`.
+3. **Рендер.** `python pipeline/make_episode.py episodes/ep02` → `output/video_02.mp4`.
+
+### Формат `episode.json`
+
+```jsonc
+{
+  "voice": { "engine": "piper:denis", "speed": 1.13, "takes": 8 },   // или "rhvoice:artemiy", "piper:dmitri"
+  "music": { "bpm": 124, "seed": 7, "lufs": -21, "duckDb": -8,
+             "cues": { "break": ["zero", 5], "build": ["goal", 4], "drop": ["cta", 0] } }, // [id строки, № слова]
+  "lines": [
+    {
+      "id": "hook",
+      "say": "Эту игру написала нейросеть.",        // что произносит голос
+      "sub": "Эту игру написала нейросеть.",        // (опц.) что в субтитрах — столько же слов
+      "emphasis": [3],                              // № слов, подсвеченных розовым
+      "shots": [                                    // смена плана привязана к № слова
+        { "w": 0, "type": "gameplay", "props": { "clip": "gameplay_main", "from": 6, "zoom": [1.35, 1.15] },
+          "fx": ["flash", "punch"], "sfx": ["boom"] },
+        { "w": 3, "type": "aichat", "props": { "mode": "coding" }, "fx": ["whip"], "sfx": ["whoosh_1"] }
+      ],
+      "sfx": [{ "w": 2, "name": "pop" }]
+    }
+  ]
+}
+```
+
+**Произношение.**
+- Ударение ставится знаком `´` после гласной: `черно́вике`.
+- Для новых слов можно подать фонемы espeak: `[[ murːmʲˈerʃ ]]`, а в `sub` написать «Мурмерж».
+- Несколько произносимых слов, которые в субтитрах идут одним словом, склеиваются через `_`: `Чат_Джи_Пи_Ти` ↔ `ChatGPT`.
+
+**Типы планов** (`remotion/src/shots/`):
+
+| Тип | Что показывает | Параметры |
+|---|---|---|
+| `gameplay` | запись игры | `clip`, `from`, `zoom:[a,b]`, `focusY`, `dim`, `sparkles`, `hearts`, `hypno` |
+| `aichat` | чат с нейросетью | `mode`: `coding` / `angry` / `fixagain`, `variant` |
+| `code` | редактор кода | `mode`: `typing` / `copypaste`, `variant` |
+| `crossout` | зачёркнутые слова | `items`, `flyaway` |
+| `party` | RPG-карточки команды | `reveal:[№слова…]` |
+| `title` | титр | `kind`: `series` / `game` |
+| `upload` | загрузка билда | — |
+| `status` | статус игры в консоли | `status` |
+| `roadmap` | дорожная карта | `lightOn:[[№слова, №узла]…]`, `continue` |
+| `money` | деньги | `mode`: `question` / `zero` / `chart` |
+| `bug` | запись с ошибками | — |
+| `subscribe` | призыв подписаться | — |
+| `teaser` | анонс следующего эпизода | `episode`, `title` |
+| `verdict` | вердикт | — |
+
+**Эффекты переходов** (`fx`): `punch`, `whip`, `flash`, `shake`, `glitch`. На `boom` камера трясётся автоматически.
+**SFX:** `assets/sfx/index.json` (вжухи, бум, клик, поп, дзинь, ошибка, глитч, грустный тромбон, скретч, райзер и др.).
+
+## Проверка качества
+
+- `node remotion/render.mjs build/ep01/timeline.json x.mp4 --stills=0,90,300 --stills-dir=/tmp/stills --scale=0.5` — стоп-кадры.
+- `build/<ep>/timeline.json` — поле `asr` у каждой строки показывает, как распознаётся озвучка (ловит плохие ударения).
+- Безопасная зона TikTok: субтитры центрированы на y≈1235, контент — между y 250 и 1130, правый край ≤ 990 px.
+
+## Структура
+
+```
+episodes/<ep>/episode.json   сценарий + раскадровка
+episodes/<ep>/script.md      человекочитаемый сценарий, варианты хуков
+footage/                     твои записи (перекрывают footage/_generated/)
+game/mock-murmerge/          макет игры для автозаписи геймплея
+pipeline/                    tts, asr, build_timeline, mix, make_episode, audio/, record_gameplay.mjs
+remotion/                    React-композиция
+assets/music, assets/sfx     сгенерированные звуки
+output/                      готовые видео и post.md
+```

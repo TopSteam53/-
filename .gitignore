@@ -1,0 +1,9 @@
+node_modules/
+models/
+__pycache__/
+*.pyc
+remotion/public/_build/
+remotion/out/
+build/
+.cache/
+assets/music/*.wav

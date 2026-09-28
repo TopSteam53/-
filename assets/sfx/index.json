@@ -1,0 +1,188 @@
+{
+ "generator": "pipeline/audio/make_sfx.py",
+ "seed": 7,
+ "sample_rate": 48000,
+ "note": "All sounds synthesized from oscillators/noise (no samples, no voices). Peak-normalized (true peak <= --peak); LUFS for sub-0.4 s files is measured over a 0.4 s window.",
+ "sounds": [
+  {
+   "file": "whoosh_1.wav",
+   "duration": 0.36,
+   "channels": 2,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.95,
+   "true_peak_dbtp": -1.0,
+   "lufs": -11.2,
+   "description": "Fast airy whoosh (0.36 s), bright filtered-noise pass-by panning L->R. Quick cuts/slides."
+  },
+  {
+   "file": "whoosh_2.wav",
+   "duration": 0.58,
+   "channels": 2,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.01,
+   "true_peak_dbtp": -1.0,
+   "lufs": -8.6,
+   "description": "Deep heavy whoosh (0.58 s), low swoosh with sub swoop. Big transitions/zoom-ins."
+  },
+  {
+   "file": "whoosh_3.wav",
+   "duration": 0.5,
+   "channels": 2,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.29,
+   "true_peak_dbtp": -1.0,
+   "lufs": -16.4,
+   "description": "Reverse-style swell (0.5 s) that rises and ends abruptly - place so the end lands ON the cut."
+  },
+  {
+   "file": "boom.wav",
+   "duration": 1.25,
+   "channels": 2,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.02,
+   "true_peak_dbtp": -1.0,
+   "lufs": -13.7,
+   "description": "Deep cinematic impact (1.25 s): 80->35 Hz sine drop + crack transient + rumble tail."
+  },
+  {
+   "file": "hit.wav",
+   "duration": 0.42,
+   "channels": 2,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.01,
+   "true_peak_dbtp": -1.0,
+   "lufs": -11.1,
+   "description": "Short punchy accent impact (0.42 s) for text slams / pop-ins."
+  },
+  {
+   "file": "click.wav",
+   "duration": 0.09,
+   "channels": 1,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.11,
+   "true_peak_dbtp": -1.0,
+   "lufs": -25.0,
+   "description": "UI mouse click (press + release, 0.09 s)."
+  },
+  {
+   "file": "key_typing.wav",
+   "duration": 2.5,
+   "channels": 2,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.01,
+   "true_peak_dbtp": -1.0,
+   "lufs": -18.2,
+   "description": "2.5 s of randomized mechanical keyboard typing (clacks, spacebar thocks, pauses)."
+  },
+  {
+   "file": "pop.wav",
+   "duration": 0.16,
+   "channels": 2,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.01,
+   "true_peak_dbtp": -1.0,
+   "lufs": -15.4,
+   "description": "Bubbly cartoon pop (rising-pitch bubble) for merges/appear."
+  },
+  {
+   "file": "pop_2.wav",
+   "duration": 0.13,
+   "channels": 2,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.01,
+   "true_peak_dbtp": -1.0,
+   "lufs": -14.2,
+   "description": "Higher, shorter pop variant (alternate with pop for successive merges)."
+  },
+  {
+   "file": "ding.wav",
+   "duration": 0.95,
+   "channels": 2,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.07,
+   "true_peak_dbtp": -1.0,
+   "lufs": -10.0,
+   "description": "Coin/success chime: bright bell G6 -> D7."
+  },
+  {
+   "file": "notify.wav",
+   "duration": 0.38,
+   "channels": 2,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.08,
+   "true_peak_dbtp": -1.0,
+   "lufs": -10.2,
+   "description": "Soft two-tone chat/message notification blip."
+  },
+  {
+   "file": "error.wav",
+   "duration": 0.52,
+   "channels": 1,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.02,
+   "true_peak_dbtp": -1.0,
+   "lufs": -13.2,
+   "description": "Harsh 'wrong' double buzzer (0.52 s)."
+  },
+  {
+   "file": "glitch.wav",
+   "duration": 0.42,
+   "channels": 2,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.09,
+   "true_peak_dbtp": -1.0,
+   "lufs": -12.5,
+   "description": "Digital stutter / bitcrush burst (0.42 s), stereo."
+  },
+  {
+   "file": "sad_trombone.wav",
+   "duration": 2.15,
+   "channels": 2,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.01,
+   "true_peak_dbtp": -1.0,
+   "lufs": -8.7,
+   "description": "Comedic fail: original brass-like 'wah-wah-wah-waaah' descending with wobbly droop (2.15 s)."
+  },
+  {
+   "file": "record_scratch.wav",
+   "duration": 0.55,
+   "channels": 2,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.01,
+   "true_peak_dbtp": -1.0,
+   "lufs": -11.7,
+   "description": "Vinyl scratch back-and-forth then spin-down stop (0.55 s) - 'wait, what?' moments."
+  },
+  {
+   "file": "riser.wav",
+   "duration": 1.5,
+   "channels": 2,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.48,
+   "true_peak_dbtp": -1.0,
+   "lufs": -17.2,
+   "description": "1.5 s tension riser (noise sweep + rising saws + accelerating tremolo), sharp end - end it on the cut."
+  },
+  {
+   "file": "sparkle.wav",
+   "duration": 1.1,
+   "channels": 2,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.05,
+   "true_peak_dbtp": -1.0,
+   "lufs": -12.4,
+   "description": "Magic twinkle: cascade of high pentatonic pings + shimmer (1.1 s), for particles/reveals."
+  },
+  {
+   "file": "camera_shake_rumble.wav",
+   "duration": 0.5,
+   "channels": 2,
+   "sample_rate": 48000,
+   "peak_dbfs": -1.01,
+   "true_peak_dbtp": -1.0,
+   "lufs": -11.0,
+   "description": "0.5 s low rumble for camera shake."
+  }
+ ]
+}
