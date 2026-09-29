@@ -13,6 +13,7 @@ import '@fontsource/jetbrains-mono/latin-400.css';
 import React from 'react';
 import { Composition, continueRender, delayRender, staticFile } from 'remotion';
 import { Main } from './Main';
+import { MurbotSheet } from './MurbotSheet';
 import type { Timeline } from './types';
 
 const fontHandle = typeof document !== 'undefined' ? delayRender('fonts') : null;
@@ -28,6 +29,8 @@ if (typeof document !== 'undefined') {
 }
 
 export const Root: React.FC = () => (
+  <>
+  <Composition id="MurbotSheet" component={MurbotSheet} fps={30} width={1920} height={1080} durationInFrames={60} />
   <Composition
     id="Main"
     component={Main as any}
@@ -42,4 +45,5 @@ export const Root: React.FC = () => (
       return { durationInFrames: Math.ceil(timeline!.duration * 30), props: { timeline } };
     }}
   />
+  </>
 );
