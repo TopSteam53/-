@@ -9,6 +9,7 @@ export type Timeline = {
   sfx: { t: number; name: string }[];
   hud?: { start: number; amount: string } | null;
   episode: any;
+  mouth?: number[];
   musicInfo?: { final_hit: number; drop_times: number[]; bpm: number };
 };
 export type ShotCtx = {

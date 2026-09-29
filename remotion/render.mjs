@@ -25,7 +25,7 @@ const browserExecutable = findBrowser();
 
 const serveUrl = await bundle({ entryPoint: path.join(here, 'src/index.ts'), publicDir: path.join(here, 'public') });
 const inputProps = { timeline };
-const composition = await selectComposition({ serveUrl, id: 'Main', inputProps, browserExecutable });
+const composition = await selectComposition({ serveUrl, id: timeline.episode?.composition || 'Main', inputProps, browserExecutable });
 const scale = opts.scale ? Number(opts.scale) : 1;
 
 if (opts.stills) {

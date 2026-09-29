@@ -14,6 +14,7 @@ import React from 'react';
 import { Composition, continueRender, delayRender, staticFile } from 'remotion';
 import { Main } from './Main';
 import { MurbotSheet } from './MurbotSheet';
+import { MurbotTalk } from './MurbotTalk';
 import type { Timeline } from './types';
 
 const fontHandle = typeof document !== 'undefined' ? delayRender('fonts') : null;
@@ -30,6 +31,20 @@ if (typeof document !== 'undefined') {
 
 export const Root: React.FC = () => (
   <>
+  <Composition
+    id="MurbotTalk"
+    component={MurbotTalk as any}
+    fps={30}
+    width={1920}
+    height={1080}
+    durationInFrames={300}
+    defaultProps={{ timeline: null as unknown as Timeline }}
+    calculateMetadata={async ({ props }) => {
+      let timeline = props.timeline as Timeline | null;
+      if (!timeline) timeline = await (await fetch(staticFile('_build/timeline.json'))).json();
+      return { durationInFrames: Math.ceil(timeline!.duration * 30), props: { timeline } };
+    }}
+  />
   <Composition id="MurbotSheet" component={MurbotSheet} fps={30} width={1920} height={1080} durationInFrames={60} />
   <Composition
     id="Main"

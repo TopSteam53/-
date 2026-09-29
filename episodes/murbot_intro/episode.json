@@ -1,0 +1,219 @@
+{
+  "id": "murbot_intro",
+  "episodeNumber": 0,
+  "composition": "MurbotTalk",
+  "series": "С НУЛЯ ДО ЗАРАБОТКА",
+  "mainClip": "murmerge_play",
+  "bgClip": "murmerge_play",
+  "bgFrom": 14,
+  "extraClips": [
+    "murmerge_play"
+  ],
+  "footage": {
+    "murmerge_play": {
+      "crop": "680:1167:20:168"
+    }
+  },
+  "voice": {
+    "engine": "piper:denis",
+    "speed": 1.08,
+    "noise_scale": 0.7,
+    "noise_w": 0.85,
+    "takes": 8
+  },
+  "music": {
+    "bpm": 124,
+    "seed": 21,
+    "lufs": -25,
+    "duckDb": -8,
+    "cues": {}
+  },
+  "leadIn": 0.45,
+  "tail": 1.3,
+  "defaultPause": 0.25,
+  "lines": [
+    {
+      "id": "hey",
+      "say": "Эй! Вообще-то это был я.",
+      "pause": 0.4,
+      "emphasis": [
+        0,
+        4
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "murbot",
+          "props": {
+            "mood": "shock"
+          },
+          "sfx": [
+            "sparkle",
+            "pop"
+          ]
+        },
+        {
+          "w": 1,
+          "type": "murbot",
+          "props": {
+            "mood": "smug"
+          }
+        }
+      ]
+    },
+    {
+      "id": "hi",
+      "say": "Привет! Я [[ murːbˈot ]].",
+      "pause": 0.3,
+      "emphasis": [
+        2
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "murbot",
+          "props": {
+            "mood": "happy",
+            "tag": "МУРБОТ",
+            "tagSub": "талисман канала «С нуля до заработка»"
+          }
+        }
+      ],
+      "sfx": [
+        {
+          "w": 2,
+          "name": "ding"
+        }
+      ],
+      "sub": "Привет! Я Мурбот.",
+      "target": "привет я мурбот",
+      "takes": 14,
+      "speed": 1.0
+    },
+    {
+      "id": "live",
+      "say": "Живу в [[ nʌudbˈukʲi ]] и пишу игры. Ну… почти пишу.",
+      "sub": "Живу в ноутбуке и пишу игры. Ну… почти пишу.",
+      "target": "живу в ноутбуке и пишу игры ну почти пишу",
+      "pause": 0.2,
+      "emphasis": [
+        4,
+        6
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "murbot",
+          "props": {
+            "mood": "happy"
+          }
+        },
+        {
+          "w": 5,
+          "type": "murbot",
+          "props": {
+            "mood": "sus"
+          }
+        }
+      ]
+    },
+    {
+      "id": "first",
+      "say": "Иногда даже с первого раза!",
+      "pause": 0.35,
+      "emphasis": [
+        3,
+        4
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "murbot",
+          "props": {
+            "mood": "smug",
+            "caption": "С ПЕРВОГО РАЗА 😎"
+          }
+        }
+      ],
+      "sfx": [
+        {
+          "w": 3,
+          "name": "hit"
+        }
+      ]
+    },
+    {
+      "id": "cats",
+      "say": "А ещё я обожаю котиков. Потому что я сам наполовину котик.",
+      "pause": 0.35,
+      "emphasis": [
+        3,
+        8,
+        9
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "murbot",
+          "props": {
+            "mood": "happy"
+          }
+        },
+        {
+          "w": 3,
+          "type": "murbot",
+          "props": {
+            "mood": "love"
+          }
+        }
+      ],
+      "sfx": [
+        {
+          "w": 3,
+          "name": "sparkle"
+        },
+        {
+          "w": 9,
+          "name": "pop_2"
+        }
+      ]
+    },
+    {
+      "id": "sub",
+      "say": "Подпишись на канал. А то я [[ ʌbʲiʒˈusʲ ]].",
+      "sub": "Подпишись на канал. А то я обижусь.",
+      "target": "подпишись на канал а то я обижусь",
+      "pause": 0.0,
+      "emphasis": [
+        0,
+        5
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "murbot",
+          "props": {
+            "mood": "happy"
+          }
+        },
+        {
+          "w": 3,
+          "type": "murbot",
+          "props": {
+            "mood": "sad"
+          }
+        }
+      ],
+      "sfx": [
+        {
+          "w": 0,
+          "name": "click"
+        },
+        {
+          "w": 5,
+          "name": "pop"
+        }
+      ]
+    }
+  ]
+}

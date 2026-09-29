@@ -71,6 +71,24 @@ def music(tl, ep_dir):
     tl["musicInfo"] = {k: json.loads(out.with_suffix(".json").read_text())[k] for k in ("final_hit", "drop_times", "bpm")}
 
 
+def mouth_envelope(wav_path, fps=30):
+    """Per-frame 0..1 mouth openness from voice loudness (for mascot lip-sync)."""
+    import numpy as np
+    import soundfile as sf
+
+    a, sr = sf.read(wav_path, dtype="float32", always_2d=True)
+    a = a.mean(1)
+    hop = sr // fps
+    n = len(a) // hop
+    rms = np.array([np.sqrt(np.mean(a[i * hop:(i + 1) * hop] ** 2) + 1e-12) for i in range(n)])
+    db = 20 * np.log10(rms + 1e-9)
+    ref = np.percentile(db[db > -60], 90) if (db > -60).any() else -20
+    m = np.clip((db - (ref - 28)) / 24, 0, 1)
+    # light smoothing + quantize so the mouth "flaps" readably
+    m = np.convolve(m, [0.25, 0.5, 0.25], mode="same")
+    return [round(float(x), 2) for x in m]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("episode")
@@ -91,6 +109,7 @@ def main():
         music(tl, ep_dir)
     else:
         tl["episode"]["music"]["file"] = str((build / "music.wav").relative_to(ROOT))
+    tl["mouth"] = mouth_envelope(build / "voice_raw.wav")
     (build / "timeline.json").write_text(json.dumps(tl, ensure_ascii=False, indent=1))
     PUB.mkdir(parents=True, exist_ok=True)
     shutil.copy(build / "timeline.json", PUB / "timeline.json")

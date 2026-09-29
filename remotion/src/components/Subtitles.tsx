@@ -33,7 +33,7 @@ export const buildPages = (tl: Timeline): Page[] => {
 
 const clean = (s: string) => s.replace(/[«»"]/g, '').replace(/\.\.\.$/, '…');
 
-export const Subtitles: React.FC<{ tl: Timeline; hidden: (t: number) => boolean }> = ({ tl, hidden }) => {
+export const Subtitles: React.FC<{ tl: Timeline; hidden: (t: number) => boolean; y?: number; left?: number; width?: number; scale?: number }> = ({ tl, hidden, y = SUB_Y, left = 60, width = 880, scale = 1 }) => {
   const frame = useCurrentFrame();
   const t = frame / FPS;
   const pages = React.useMemo(() => buildPages(tl), [tl]);
@@ -42,11 +42,11 @@ export const Subtitles: React.FC<{ tl: Timeline; hidden: (t: number) => boolean 
   const pf = Math.round(page.start * FPS);
   const enter = interpolate(frame - pf, [0, 4], [0.7, 1], clamp);
   const long = page.words.reduce((a, w) => a + w.text.length, 0) > 13;
-  const size = long ? 84 : 100;
+  const size = (long ? 84 : 100) * scale;
   return (
     <AbsoluteFill style={{ pointerEvents: 'none' }}>
       <div style={{
-        position: 'absolute', left: 60, width: 880, top: SUB_Y, transform: `translateY(-50%) scale(${enter})`,
+        position: 'absolute', left, width, top: y, transform: `translateY(-50%) scale(${enter})`,
         display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', columnGap: 34, rowGap: 0,
         textAlign: 'center',
       }}>
