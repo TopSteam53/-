@@ -105,8 +105,8 @@ export const MascotTalk: React.FC<{ timeline: Timeline }> = ({ timeline: tl }) =
       )}
 
       {p.caption && (
-        <div style={{ position: 'absolute', right: 90, top: 300, width: 520, textAlign: 'center', transform: `scale(${pop(frame, f(shot.start) + 4, 8)}) rotate(4deg)` }}>
-          <span style={{ fontFamily: FONT.title, fontWeight: 900, fontSize: 64, lineHeight: 1.15, color: COLORS.yellow, ...stroke(10) }}>{p.caption}</span>
+        <div style={{ position: 'absolute', right: 50, top: 300, width: 640, textAlign: 'center', transform: `scale(${pop(frame, f(shot.start) + 4, 8)}) rotate(4deg)` }}>
+          <span style={{ fontFamily: FONT.title, fontWeight: 900, fontSize: (p.caption || '').length > 14 ? 50 : 64, lineHeight: 1.15, color: COLORS.yellow, ...stroke(10) }}>{p.caption}</span>
         </div>
       )}
 
