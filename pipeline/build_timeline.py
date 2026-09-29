@@ -136,9 +136,11 @@ def main(ep_dir):
         starts = align_words(expected, asr, dur)
         words = []
         emph = set(line.get("emphasis", []))
+        bleep = set(line.get("bleep", []))
         for i, (w, s0) in enumerate(zip(ut, starts)):
             e0 = starts[i + 1] if i + 1 < len(starts) else dur
-            words.append({"text": w, "start": round(t + max(0, s0 - 0.04), 3), "end": round(t + e0, 3), "emph": i in emph})
+            words.append({"text": w, "start": round(t + max(0, s0 - 0.04), 3), "end": round(t + e0, 3), "emph": i in emph,
+                          **({"bleep": True} if i in bleep else {})})
         lstart, lend = t, t + dur
         lines_out.append({"id": line["id"], "start": round(lstart, 3), "end": round(lend, 3), "words": words,
                           "asr": " ".join(w for w, _, _ in asr)})

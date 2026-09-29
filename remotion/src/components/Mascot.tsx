@@ -1,13 +1,13 @@
 import React from 'react';
 
-export type MurbotMood = 'happy' | 'smug' | 'shock' | 'sad' | 'love' | 'sus' | 'talk';
+export type MascotMood = 'happy' | 'smug' | 'shock' | 'sad' | 'love' | 'sus' | 'talk';
 
 /**
- * Мурбот — channel mascot: a floating cat-robot "pixie" (original design).
+ * Channel mascot (name lives in episode/docs, currently «Барсик»): a floating cat-robot "pixie" (original design).
  * mouth: 0..1 (drive from voice amplitude for lip-sync), blink: 0..1, t: frame for idle motion.
  */
-export const Murbot: React.FC<{
-  size?: number; mood?: MurbotMood; mouth?: number; blink?: number; t?: number; glow?: boolean; style?: React.CSSProperties;
+export const Mascot: React.FC<{
+  size?: number; mood?: MascotMood; mouth?: number; blink?: number; t?: number; glow?: boolean; style?: React.CSSProperties;
 }> = ({ size = 400, mood = 'happy', mouth = 0, blink = 0, t = 0, glow = true, style }) => {
   const bob = Math.sin(t / 9) * 6;
   const earWiggle = Math.sin(t / 5) * 3;

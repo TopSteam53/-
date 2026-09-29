@@ -1,4 +1,4 @@
-export type Word = { text: string; start: number; end: number; emph: boolean };
+export type Word = { text: string; start: number; end: number; emph: boolean; bleep?: boolean };
 export type Line = { id: string; start: number; end: number; words: Word[] };
 export type Shot = {
   idx: number; start: number; end: number; line: string; type: string;

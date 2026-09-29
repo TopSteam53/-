@@ -1,7 +1,7 @@
 import React from 'react';
 import { AbsoluteFill, interpolate, random, useCurrentFrame, useVideoConfig } from 'remotion';
 import { Burst, Floaters, Grid, Vignette } from './components/Fx';
-import { Murbot } from './components/Murbot';
+import { Mascot } from './components/Mascot';
 import { Subtitles } from './components/Subtitles';
 import { clamp, COLORS, f, FONT, FPS, pop, stroke } from './lib';
 import { GameVideo } from './shots/Gameplay';
@@ -29,7 +29,7 @@ const Poof: React.FC<{ at: number; x: number; y: number }> = ({ at, x, y }) => {
   );
 };
 
-export const MurbotTalk: React.FC<{ timeline: Timeline }> = ({ timeline: tl }) => {
+export const MascotTalk: React.FC<{ timeline: Timeline }> = ({ timeline: tl }) => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
   const t = frame / FPS;
@@ -54,6 +54,8 @@ export const MurbotTalk: React.FC<{ timeline: Timeline }> = ({ timeline: tl }) =
     if (w.emph) hop += -26 * Math.max(0, 1 - Math.abs(frame - f(w.start) - 3) / 6);
   }));
 
+  const bleepOn = tl.lines.some((l) => l.words.some((w) => w.bleep && t >= w.start - 0.02 && t < Math.min(w.end, w.start + 0.55) + 0.1));
+
   const tagShot = tl.shots.find((s) => s.props?.tag);
   const tagAt = tagShot ? f(tagShot.start) : -1;
   const tagOn = tagShot && t >= tagShot.start && t < tagShot.end;
@@ -75,8 +77,17 @@ export const MurbotTalk: React.FC<{ timeline: Timeline }> = ({ timeline: tl }) =
         transform: `scale(${appear * leave}) rotate(${talkTilt}deg) scaleY(${squash})`, transformOrigin: '50% 70%',
         filter: 'drop-shadow(0 30px 40px rgba(0,0,0,0.45))',
       }}>
-        <Murbot size={580} mood={p.mood || 'happy'} mouth={mouth} blink={blink} t={frame} />
+        <Mascot size={580} mood={p.mood || 'happy'} mouth={mouth} blink={blink} t={frame} />
       </div>
+      {bleepOn && (
+        <div style={{
+          position: 'absolute', left: cx - 150 + (random(`bx${frame}`) - 0.5) * 16, top: cy + 30 + hop + (random(`by${frame}`) - 0.5) * 10,
+          width: 300, height: 90, background: '#000', transform: 'rotate(-6deg)', display: 'grid', placeItems: 'center',
+          border: '5px solid #fff', boxShadow: '0 10px 30px rgba(0,0,0,0.6)',
+        }}>
+          <span style={{ fontFamily: FONT.title, fontWeight: 900, fontSize: 44, color: '#fff', letterSpacing: 2 }}>ПИ-И-ИП</span>
+        </div>
+      )}
       <Poof at={enterAt} x={cx} y={cy} />
       <Burst at={enterAt + 2} x={cx} y={cy} n={24} items={['✨', '⭐', '💫']} seed={9} spread={700} size={60} />
       <Poof at={exitAt} x={cx} y={cy} />

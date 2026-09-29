@@ -51,11 +51,17 @@ def transcribe(audio, sr):
 def words_with_times(audio, sr):
     """Group BPE tokens into words -> [(word, start, end_guess)]."""
     _, toks = transcribe(audio, sr)
+    # GigaAM emits characters with " " tokens between words; BPE models mark word starts with "▁"
     words = []
+    new_word = True
     for tok, t in toks:
-        if tok.startswith("▁") or not words:
+        if tok.strip() == "":
+            new_word = True
+            continue
+        if tok.startswith("▁") or new_word or not words:
             words.append([tok.lstrip("▁"), t, t])
         else:
             words[-1][0] += tok
             words[-1][2] = t
+        new_word = False
     return [(w, s, e) for w, s, e in words if w]

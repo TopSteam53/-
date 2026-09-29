@@ -55,7 +55,7 @@ export const Subtitles: React.FC<{ tl: Timeline; hidden: (t: number) => boolean;
           const active = frame >= wf && t < (w.end + 0.05);
           const spoken = frame >= wf;
           const p = interpolate(frame - wf, [0, 3, 7], [1, 1.12, 1.04], clamp);
-          const color = active ? (w.emph ? COLORS.pink : COLORS.yellow) : '#FFFFFF';
+          const color = w.bleep && spoken ? COLORS.red : active ? (w.emph ? COLORS.pink : COLORS.yellow) : '#FFFFFF';
           return (
             <span key={w.key} style={{
               fontFamily: FONT.body, fontWeight: 900, fontSize: size, lineHeight: 1.12, textTransform: 'uppercase',

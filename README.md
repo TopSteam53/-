@@ -91,6 +91,12 @@ python pipeline/make_episode.py episodes/ep01 --draft   # быстрый чер�
 **Эффекты переходов** (`fx`): `punch`, `whip`, `flash`, `shake`, `glitch`. На `boom` камера трясётся автоматически.
 **SFX:** `assets/sfx/index.json` (вжухи, бум, клик, поп, дзинь, ошибка, глитч, грустный тромбон, скретч, райзер и др.).
 
+## Мат и пики
+
+- В сценарии: `"bleep": [№слова]` у строки. Слово в озвучке заменяется TV-пиком, в субтитрах краснеет (пиши его со звёздочками в `sub`).
+- В твоих записях: `python pipeline/bleep.py in.wav out.wav --json bleeps.json` сам находит мат через распознавание и запикивает.
+- Правила тона и юмора канала — в `CLAUDE.md`.
+
 ## Проверка качества
 
 - `node remotion/render.mjs build/ep01/timeline.json x.mp4 --stills=0,90,300 --stills-dir=/tmp/stills --scale=0.5` — стоп-кадры.

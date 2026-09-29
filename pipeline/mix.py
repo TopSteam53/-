@@ -99,6 +99,11 @@ def main(tl_path, out_path):
     voice = np.pad(voice, ((0, n - len(voice)), (0, 0)))
     meter = pyln.Meter(SR)
     voice *= db(-16 - meter.integrated_loudness(voice))
+    bleeps = [{"start": max(0, w["start"] - 0.02), "end": min(w["end"], w["start"] + 0.55)}
+              for l in tl["lines"] for w in l["words"] if w.get("bleep")]
+    if bleeps:
+        from bleep import apply_bleeps
+        voice = apply_bleeps(voice, SR, bleeps)
 
     mcfg = ep.get("music", {})
     music = load(ROOT / mcfg.get("file", f"build/{tl['id']}/music.wav"))[:n]
