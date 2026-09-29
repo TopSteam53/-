@@ -77,6 +77,16 @@ python pipeline/make_episode.py episodes/ep01 --draft   # быстрый чер�
 | `teaser` | анонс следующего эпизода | `episode`, `title` |
 | `verdict` | вердикт | — |
 | `tg` | карточка Telegram-канала | `title`, `items` |
+| `phone` | 3D-мокап телефона с клипом на экране | `clip`, `from`, `rotY:[a,b]`, `coins`, `tap:{x,y,w}`, `label`, `bg` |
+| `coins` | дождь из 3D-монет (можно поверх размытого клипа) | `clip`, `from`, `text`, `size`, `n` |
+| `big` | огромное слово с иконкой | `icon`, `text`, `sub` |
+| `list` | карточки, появляющиеся по словам | `title`, `items:[{icon,t,s,w,hi}]` (`w:-1` — уже показан) |
+| `flow` | схема «откуда деньги» с летящими монетами | `nodes:[{icon,t,w}]` |
+| `formula` | формула из множителей | `terms:[{icon,t,w}]`, `resultW` |
+
+Для `gameplay` доступны ещё `magnify:{at:[x,y],zoom,r,pos:[px,py]}` (лупа) и `badge` (плашка «ЭПИЗОД 1»).
+Весь b-roll генерируется кодом, внешние стоки не нужны. Если откроешь доступ к Pexels или Pixabay в сетевых настройках
+окружения или положишь свои клипы в `footage/`, их можно ставить в любой `gameplay`/`phone`/`coins` через `clip`.
 
 **Эффекты переходов** (`fx`): `punch`, `whip`, `flash`, `shake`, `glitch`. На `boom` камера трясётся автоматически.
 **SFX:** `assets/sfx/index.json` (вжухи, бум, клик, поп, дзинь, ошибка, глитч, грустный тромбон, скретч, райзер и др.).

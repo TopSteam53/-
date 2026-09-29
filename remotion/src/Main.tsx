@@ -10,11 +10,13 @@ import { Code } from './shots/Code';
 import { Gameplay } from './shots/Gameplay';
 import { Money } from './shots/Money';
 import { Subscribe, Teaser, TgCard, Title, Verdict } from './shots/Titles';
+import { BigText, CoinRain, Flow, Formula, ListCard, Phone } from './shots/Broll';
 import type { ShotCtx, Timeline } from './types';
 
 const SHOTS: Record<string, React.FC<{ ctx: ShotCtx }>> = {
   gameplay: Gameplay, aichat: Chat, code: Code, crossout: Crossout, party: Party, title: Title, upload: Upload,
   roadmap: Roadmap, money: Money, bug: Bug, status: Status, subscribe: Subscribe, teaser: Teaser, verdict: Verdict, tg: TgCard,
+  phone: Phone, coins: CoinRain, big: BigText, list: ListCard, flow: Flow, formula: Formula,
 };
 
 const NO_HUD = new Set(['title', 'subscribe', 'teaser', 'verdict', 'money', 'status']);

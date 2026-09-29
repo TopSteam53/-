@@ -1,0 +1,764 @@
+{
+  "id": "ep02",
+  "episodeNumber": 2,
+  "series": "С НУЛЯ ДО ЗАРАБОТКА",
+  "gameName": "МУРМЕРЖ",
+  "mainClip": "murmerge_play",
+  "footage": {
+    "murmerge_play": {
+      "crop": "680:1167:20:168"
+    }
+  },
+  "voice": {
+    "engine": "piper:denis",
+    "speed": 1.13,
+    "noise_scale": 0.7,
+    "noise_w": 0.85,
+    "takes": 8
+  },
+  "music": {
+    "bpm": 124,
+    "seed": 11,
+    "lufs": -21,
+    "duckDb": -8,
+    "cues": {
+      "break": [
+        "formula",
+        0
+      ],
+      "build": [
+        "money",
+        0
+      ],
+      "drop": [
+        "tg",
+        0
+      ],
+      "outro": [
+        "sub",
+        4
+      ]
+    }
+  },
+  "leadIn": 0.32,
+  "tail": 1.5,
+  "defaultPause": 0.12,
+  "lines": [
+    {
+      "id": "hook1",
+      "say": "Игра бесплатная.",
+      "pause": 0.08,
+      "emphasis": [
+        1
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "phone",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 14.4,
+            "rotY": [
+              -32,
+              -12
+            ],
+            "coins": true
+          },
+          "fx": [
+            "flash",
+            "punch"
+          ],
+          "sfx": [
+            "boom"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hook2",
+      "say": "Так откуда деньги?",
+      "pause": 0.2,
+      "emphasis": [
+        2
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "coins",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 29,
+            "text": "₽ ?",
+            "size": 260
+          },
+          "fx": [
+            "punch"
+          ],
+          "sfx": [
+            "hit"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ep",
+      "say": "Это второй эпизод челленджа: с нуля — до заработка на Яндекс Играх.",
+      "pause": 0.25,
+      "emphasis": [
+        1,
+        7
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 20,
+            "zoom": [
+              1.05,
+              1.25
+            ],
+            "dim": 0.35
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_2",
+            "riser"
+          ]
+        },
+        {
+          "w": 3,
+          "type": "title",
+          "props": {
+            "kind": "series",
+            "lines": [
+              [
+                "ЧЕЛЛЕНДЖ",
+                112
+              ],
+              [
+                "С НУЛЯ",
+                150
+              ],
+              [
+                "ДО ЗАРАБОТКА",
+                96
+              ]
+            ],
+            "chip": "ЭПИЗОД 2"
+          },
+          "fx": [
+            "flash",
+            "shake"
+          ],
+          "sfx": [
+            "boom"
+          ],
+          "hideSubs": true
+        }
+      ]
+    },
+    {
+      "id": "recap",
+      "say": "В прошлой серии — игра про котиков, которую я завайбкодил.",
+      "takes": 12,
+      "pause": 0.15,
+      "emphasis": [
+        5,
+        8
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 16.5,
+            "zoom": [
+              1.3,
+              1.45
+            ],
+            "focus": [
+              0.5,
+              0.42
+            ],
+            "badge": "ЭПИЗОД 1"
+          },
+          "fx": [
+            "whip",
+            "glitch"
+          ],
+          "sfx": [
+            "glitch",
+            "whoosh_1"
+          ]
+        },
+        {
+          "w": 6,
+          "type": "aichat",
+          "props": {
+            "mode": "coding"
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ads",
+      "say": "Главный источник денег здесь — реклама.",
+      "pause": 0.2,
+      "emphasis": [
+        2,
+        4
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "coins",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 30
+          }
+        },
+        {
+          "w": 4,
+          "type": "big",
+          "props": {
+            "icon": "📺",
+            "text": "РЕКЛАМА"
+          },
+          "fx": [
+            "flash",
+            "punch"
+          ],
+          "sfx": [
+            "boom"
+          ],
+          "hideSubs": true
+        }
+      ]
+    },
+    {
+      "id": "button",
+      "say": "Видишь кнопку «икс_два доход»?",
+      "sub": "Видишь кнопку «x2 доход»?",
+      "pause": 0.12,
+      "emphasis": [
+        2,
+        3
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 1.0,
+            "zoom": [
+              1.0,
+              1.06
+            ],
+            "dim": 0.3,
+            "magnify": {
+              "at": [
+                0.845,
+                0.885
+              ],
+              "zoom": 2.3,
+              "r": 270,
+              "pos": [
+                540,
+                700
+              ],
+              "delay": 3
+            }
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_1"
+          ]
+        }
+      ],
+      "sfx": [
+        {
+          "w": 1,
+          "name": "pop"
+        },
+        {
+          "w": 2,
+          "name": "click"
+        }
+      ]
+    },
+    {
+      "id": "watch",
+      "say": "Смотришь короткую рекламу — и котики приносят в два раза больше монет.",
+      "pause": 0.15,
+      "emphasis": [
+        2,
+        7,
+        8
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "phone",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 1.0,
+            "rotY": [
+              18,
+              6
+            ],
+            "tap": {
+              "x": 0.9,
+              "y": 0.89,
+              "w": 0
+            },
+            "label": "📺 → x2 ДОХОД",
+            "bg": "radial-gradient(circle at 50% 35%, #7A2A5C, #1A0B1F 70%)"
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_2",
+            "click"
+          ]
+        },
+        {
+          "w": 4,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 29.4,
+            "zoom": [
+              1.8,
+              2.0
+            ],
+            "focus": [
+              0.5,
+              0.12
+            ],
+            "target": 0.22,
+            "sparkles": true
+          },
+          "fx": [
+            "punch"
+          ],
+          "sfx": [
+            "ding",
+            "sparkle"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rewarded",
+      "say": "Это реклама за вознаграждение: игрок смотрит её сам, когда хочет.",
+      "pause": 0.12,
+      "emphasis": [
+        3,
+        7
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "list",
+          "props": {
+            "title": "ВИДЫ РЕКЛАМЫ",
+            "items": [
+              {
+                "icon": "🎁",
+                "t": "За вознаграждение",
+                "s": "игрок смотрит сам",
+                "w": 1,
+                "hi": true
+              }
+            ]
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_3"
+          ]
+        }
+      ],
+      "sfx": [
+        {
+          "w": 1,
+          "name": "pop"
+        }
+      ]
+    },
+    {
+      "id": "other",
+      "say": "А ещё бывает реклама на весь экран, в паузах. Плюс баннеры.",
+      "pause": 0.2,
+      "emphasis": [
+        5,
+        10
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "list",
+          "props": {
+            "title": "ВИДЫ РЕКЛАМЫ",
+            "items": [
+              {
+                "icon": "🎁",
+                "t": "За вознаграждение",
+                "s": "игрок смотрит сам",
+                "w": -1
+              },
+              {
+                "icon": "🖥️",
+                "t": "Полноэкранная",
+                "s": "в паузах игры",
+                "w": 3,
+                "hi": true
+              },
+              {
+                "icon": "🧷",
+                "t": "Баннеры",
+                "s": "висят на экране",
+                "w": 10,
+                "hi": true
+              }
+            ]
+          }
+        }
+      ],
+      "sfx": [
+        {
+          "w": 3,
+          "name": "pop"
+        },
+        {
+          "w": 10,
+          "name": "pop_2"
+        }
+      ]
+    },
+    {
+      "id": "share",
+      "say": "Яндекс показывает рекламу, а разработчик получает долю дохода.",
+      "pause": 0.2,
+      "emphasis": [
+        4,
+        6
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "flow",
+          "props": {
+            "nodes": [
+              {
+                "icon": "🎮",
+                "t": "Яндекс Игры",
+                "w": 0
+              },
+              {
+                "icon": "📺",
+                "t": "Показ рекламы",
+                "w": 1
+              },
+              {
+                "icon": "🧑‍💻",
+                "t": "Разработчик — я",
+                "w": 4
+              }
+            ]
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_1"
+          ]
+        }
+      ],
+      "sfx": [
+        {
+          "w": 1,
+          "name": "pop"
+        },
+        {
+          "w": 4,
+          "name": "pop_2"
+        },
+        {
+          "w": 6,
+          "name": "ding"
+        }
+      ]
+    },
+    {
+      "id": "formula",
+      "say": "Формула простая: игроки, умножить на время в игре, умножить на рекламу.",
+      "pause": 0.2,
+      "emphasis": [
+        2,
+        5,
+        10
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "formula",
+          "props": {
+            "title": "ФОРМУЛА ДОХОДА",
+            "terms": [
+              {
+                "icon": "👥",
+                "t": "Игроки",
+                "w": 2
+              },
+              {
+                "icon": "⏱️",
+                "t": "Время в игре",
+                "w": 5
+              },
+              {
+                "icon": "📺",
+                "t": "Реклама",
+                "w": 10
+              }
+            ],
+            "resultW": 10
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_2"
+          ]
+        }
+      ],
+      "sfx": [
+        {
+          "w": 2,
+          "name": "pop"
+        },
+        {
+          "w": 5,
+          "name": "pop"
+        },
+        {
+          "w": 10,
+          "name": "pop_2"
+        }
+      ]
+    },
+    {
+      "id": "retention",
+      "say": "Значит, от котиков должно быть сложно оторваться.",
+      "pause": 0.2,
+      "emphasis": [
+        5,
+        6
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 16.5,
+            "zoom": [
+              1.2,
+              1.35
+            ],
+            "focus": [
+              0.5,
+              0.45
+            ],
+            "hearts": true
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_3"
+          ]
+        },
+        {
+          "w": 5,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 24.85,
+            "zoom": [
+              1.25,
+              1.4
+            ],
+            "focus": [
+              0.5,
+              0.44
+            ],
+            "sparkles": true
+          },
+          "fx": [
+            "flash",
+            "punch"
+          ],
+          "sfx": [
+            "sparkle"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "money",
+      "say": "Сколько это в рублях — покажу честно, как только появятся цифры.",
+      "pause": 0.2,
+      "emphasis": [
+        3,
+        5,
+        9
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "money",
+          "props": {
+            "mode": "question"
+          },
+          "fx": [
+            "punch",
+            "flash"
+          ],
+          "sfx": [
+            "hit"
+          ]
+        },
+        {
+          "w": 4,
+          "type": "money",
+          "props": {
+            "mode": "chart"
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tg",
+      "say": "Промты и заметки — в моём [[ tˌɛɡˌɛkˈa ]]. Ссылка в профиле.",
+      "sub": "Промты и заметки — в моём ТГК. Ссылка в профиле.",
+      "target": "промты и заметки в моем тгк ссылка в профиле",
+      "pause": 0.2,
+      "emphasis": [
+        0,
+        5,
+        8
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "tg",
+          "props": {
+            "title": "МОЙ ТГК",
+            "items": [
+              "📜 Все промты",
+              "📝 Заметки по рекламе",
+              "📊 Честные цифры",
+              "👤 Ссылка в профиле"
+            ]
+          },
+          "fx": [
+            "flash",
+            "punch"
+          ],
+          "sfx": [
+            "boom"
+          ]
+        }
+      ],
+      "sfx": [
+        {
+          "w": 0,
+          "name": "pop"
+        },
+        {
+          "w": 2,
+          "name": "pop_2"
+        },
+        {
+          "w": 5,
+          "name": "ding"
+        }
+      ]
+    },
+    {
+      "id": "sub",
+      "say": "Подпишись, чтобы не пропустить следующий шаг челленджа.",
+      "pause": 0.0,
+      "emphasis": [
+        0,
+        5
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "subscribe",
+          "props": {},
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_1"
+          ]
+        },
+        {
+          "w": 4,
+          "type": "phone",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 16.5,
+            "rotY": [
+              -20,
+              -6
+            ],
+            "coins": true,
+            "label": "ЭПИЗОД 3 — СКОРО"
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_2"
+          ]
+        }
+      ],
+      "sfx": [
+        {
+          "w": 1,
+          "name": "click"
+        },
+        {
+          "w": 2,
+          "name": "ding"
+        }
+      ]
+    }
+  ]
+}

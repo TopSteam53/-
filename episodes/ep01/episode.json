@@ -116,15 +116,15 @@
       "shots": [
         {
           "w": 0,
-          "type": "gameplay",
+          "type": "phone",
           "props": {
             "clip": "murmerge_play",
             "from": 28,
-            "zoom": [
-              1.0,
-              1.2
+            "rotY": [
+              -30,
+              -10
             ],
-            "dim": 0.35
+            "coins": true
           },
           "fx": [
             "whip"
@@ -582,9 +582,12 @@
       "shots": [
         {
           "w": 0,
-          "type": "money",
+          "type": "coins",
           "props": {
-            "mode": "question"
+            "clip": "murmerge_play",
+            "from": 29,
+            "text": "₽ ?",
+            "size": 260
           },
           "fx": [
             "punch",

@@ -1,7 +1,7 @@
 import React from 'react';
 import { AbsoluteFill, interpolate, OffthreadVideo, staticFile, useCurrentFrame, Easing } from 'remotion';
 import { Burst, Floaters, Vignette } from '../components/Fx';
-import { clamp, FPS, H, W } from '../lib';
+import { clamp, COLORS, FONT, FPS, H, pop, W } from '../lib';
 import type { ShotCtx } from '../types';
 
 export const clipSrc = (clip: string) => staticFile(`_build/footage/${clip}.mp4`);
@@ -35,6 +35,31 @@ export const Gameplay: React.FC<{ ctx: ShotCtx }> = ({ ctx }) => {
         <GameVideo clip={p.clip} from={p.from} rate={p.rate} />
       </AbsoluteFill>
       {p.dim ? <AbsoluteFill style={{ background: `rgba(10,6,30,${p.dim})` }} /> : null}
+      {p.magnify && (() => {
+        // magnifier loupe: shows point magnify.at (0..1 of frame) enlarged inside a circle at magnify.pos (px)
+        const m = p.magnify;
+        const mz = m.zoom || 2.4;
+        const r = m.r || 250;
+        const [cx, cy] = m.pos || [540, 760];
+        const s = pop(frame, m.delay ?? 4, 9);
+        return (
+          <div style={{
+            position: 'absolute', left: cx - r, top: cy - r, width: r * 2, height: r * 2, borderRadius: '50%', overflow: 'hidden',
+            border: `12px solid ${COLORS.yellow}`, boxShadow: '0 20px 60px rgba(0,0,0,0.6), 0 0 0 8px #000', transform: `scale(${s})`, background: '#000',
+          }}>
+            <div style={{ position: 'absolute', left: r - m.at[0] * W * mz, top: r - m.at[1] * H * mz, width: W * mz, height: H * mz }}>
+              <GameVideo clip={p.clip} from={(p.from || 0)} rate={p.rate} />
+            </div>
+          </div>
+        );
+      })()}
+      {p.badge && (
+        <div style={{
+          position: 'absolute', left: 40, top: 240, transform: `scale(${pop(frame, 2, 8)}) rotate(-3deg)`, transformOrigin: '0 50%',
+          background: COLORS.pink, color: '#fff', fontFamily: FONT.title, fontWeight: 900, fontSize: 40, padding: '10px 26px',
+          borderRadius: 16, border: '5px solid #000', boxShadow: '0 8px 0 #000',
+        }}>{p.badge}</div>
+      )}
       {p.sparkles && <Burst at={2} x={540} y={900} n={22} items={['✨', '⭐', '💫']} seed={ctx.shot.idx} />}
       {p.hearts && <Floaters items={['💖', '💕', '✨', '🐾']} n={14} seed={ctx.shot.idx} />}
       <Vignette strength={0.45} />
