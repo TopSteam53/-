@@ -6,18 +6,17 @@ import type { ShotCtx } from '../types';
 import { colorize } from './Chat';
 
 const CODE = [
-  `// мурмерж — главный цикл
-const TIERS = ["котёнок","рыжий","серый",
-  "чёрный","пятнистый","КОРОЛЬ"];
-function onCollide(a, b) {
-  if (a.tier !== b.tier) return;
-  const cat = spawnCat(a.tier + 1);
-  cat.pos = mid(a.pos, b.pos);
-  removeCats(a, b);
-  score += 10 * (a.tier + 1);
-  shakeScreen(4);
+  `// мурмерж — слияние котиков
+function onDrop(cell, cat) {
+  const other = grid[cell];
+  if (other && other.lvl === cat.lvl) {
+    grid[cell] = newCat(cat.lvl + 1);
+    coinsPerSec += INCOME[cat.lvl + 1];
+    burstCoins(cell);
+    kotopedia.unlock(cat.lvl + 1);
+  }
 }
-ysdk.features.LoadingAPI.ready();`,
+setInterval(() => coins += coinsPerSec, 1000);`,
   `// публикация на Яндекс Играх
 YaGames.init().then((sdk) => {
   window.ysdk = sdk;

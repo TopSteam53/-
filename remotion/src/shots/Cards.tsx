@@ -116,10 +116,10 @@ const Console: React.FC<{ children: React.ReactNode; title?: string }> = ({ chil
   </div>
 );
 
-const GameRow: React.FC<{ status: React.ReactNode }> = ({ status }) => (
+const GameRow: React.FC<{ status: React.ReactNode; clip: string }> = ({ status, clip }) => (
   <div style={{ display: 'flex', gap: 30, alignItems: 'center', background: '#fff', borderRadius: 28, padding: 26, boxShadow: '0 6px 20px rgba(40,20,90,0.08)' }}>
     <div style={{ width: 200, height: 200, borderRadius: 28, overflow: 'hidden', flexShrink: 0, background: '#FFD9E8' }}>
-      <GameVideo clip="gameplay_main" from={10} style={{ objectPosition: '50% 60%' }} />
+      <GameVideo clip={clip} from={10} style={{ objectPosition: '50% 40%' }} />
     </div>
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <div style={{ fontFamily: FONT.title, fontWeight: 900, fontSize: 52, color: '#1B1636' }}>Мурмерж</div>
@@ -136,7 +136,7 @@ export const Status: React.FC<{ ctx: ShotCtx }> = ({ ctx }) => {
     <AbsoluteFill>
       <Bg a="#26225A" b="#0E0B1F" />
       <Console>
-        <GameRow status={<div style={{ fontSize: 30, fontWeight: 800, color: '#8A84A8' }}>Статус: <span style={{ color: '#FF9A3C' }}>не опубликована</span></div>} />
+        <GameRow clip={ctx.tl.episode.mainClip || 'gameplay_main'} status={<div style={{ fontSize: 30, fontWeight: 800, color: '#8A84A8' }}>Статус: <span style={{ color: '#FF9A3C' }}>не опубликована</span></div>} />
         <div style={{ display: 'flex', gap: 24, marginTop: 30 }}>
           {[['Игроков', '0'], ['Доход', '0 ₽'], ['Оценка', '—']].map(([k, v]) => (
             <div key={k} style={{ flex: 1, background: '#fff', borderRadius: 24, padding: '24px 26px', boxShadow: '0 6px 20px rgba(40,20,90,0.08)' }}>

@@ -3,8 +3,7 @@
   python pipeline/make_episode.py episodes/ep01 [--out output/video_01.mp4] [--draft] [--skip-voice] [--skip-music]
 
 Steps: voice + word timeline -> footage prep -> music (synced to cues) -> Remotion render -> mix -> mux.
-Footage: a shot with {"clip": "gameplay_main"} uses footage/gameplay_main.mp4 (your real recording) if it
-exists, otherwise footage/_generated/gameplay_main.mp4 (auto-recorded mock game).
+Footage: a shot with {"clip": "murmerge_play"} uses footage/murmerge_play.(mp4|mov|webm|mkv).
 """
 import argparse
 import json
@@ -23,28 +22,39 @@ def run(cmd, **kw):
 
 
 def find_clip(name):
-    for d in (ROOT / "footage", ROOT / "footage" / "_generated"):
+    for d in (ROOT / "footage",):
         for ext in (".mp4", ".mov", ".webm", ".mkv"):
             p = d / f"{name}{ext}"
             if p.exists():
                 return p
-    raise SystemExit(f"Footage '{name}' not found in footage/ or footage/_generated/")
+    raise SystemExit(f"Footage '{name}' not found in footage/")
 
 
 def prep_footage(tl):
-    """Normalize every referenced clip to 1080x1920 / 30 fps H.264 (cover-crop) for Remotion."""
+    """Normalize every referenced clip to 1080x1920 / 30 fps H.264 for Remotion.
+
+    episode.json "footage": {"<clip>": {"crop": "w:h:x:y"}} crops phone/browser UI first; the result is
+    fitted by width over a blurred copy of itself (no black bars)."""
+    fcfg = tl["episode"].get("footage", {})
     out = PUB / "footage"
     out.mkdir(parents=True, exist_ok=True)
     clips = {s["props"]["clip"] for s in tl["shots"] if s.get("props", {}).get("clip")}
-    clips |= {"gameplay_main"}  # used by status/game cards
+    clips |= set(tl["episode"].get("extraClips", []))
     for c in sorted(clips):
         src = find_clip(c)
         dst = out / f"{c}.mp4"
-        if dst.exists() and dst.stat().st_mtime > src.stat().st_mtime:
+        cfg = fcfg.get(c, {})
+        stamp = out / f"{c}.cfg"
+        if dst.exists() and dst.stat().st_mtime > src.stat().st_mtime and stamp.exists() and stamp.read_text() == json.dumps(cfg):
             continue
-        vf = "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30,format=yuv420p"
-        run(["ffmpeg", "-y", "-loglevel", "error", "-i", src, "-an", "-vf", vf, "-c:v", "libx264", "-crf", "14",
-             "-preset", "fast", "-g", "15", dst])
+        crop = f"crop={cfg['crop']}," if cfg.get("crop") else ""
+        fc = (f"[0:v]{crop}fps=30,split[a][b];"
+              "[a]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=40:2,eq=brightness=-0.08[bg];"
+              "[b]scale=1080:1920:force_original_aspect_ratio=decrease:flags=lanczos,unsharp=5:5:0.6[fg];"
+              "[bg][fg]overlay=(W-w)/2:(H-h)/2,format=yuv420p[v]")
+        run(["ffmpeg", "-y", "-loglevel", "error", "-i", src, "-an", "-filter_complex", fc, "-map", "[v]",
+             "-c:v", "libx264", "-crf", "14", "-preset", "fast", "-g", "15", dst])
+        stamp.write_text(json.dumps(cfg))
 
 
 def music(tl, ep_dir):

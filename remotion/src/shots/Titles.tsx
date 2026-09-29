@@ -29,9 +29,6 @@ export const Title: React.FC<{ ctx: ShotCtx }> = ({ ctx }) => {
           <GameVideo clip={p.clip || 'gameplay_main'} from={p.from || 0} />
         </AbsoluteFill>
         <Floaters items={['✨', '🐾', '💖', '⭐']} n={14} seed={9} />
-        <div style={{ position: 'absolute', top: 330, width: '100%', display: 'flex', justifyContent: 'center', transform: `translateY(${ease(frame, 4, 14, -500, 0)}px)` }}>
-          <Cat size={330} body="#F7D774" ear="#FF9FB5" crown mood="happy" blink={frame % 45 > 40} />
-        </div>
         <div style={{ position: 'absolute', top: 720, width: '100%', display: 'flex', justifyContent: 'center' }}>
           {letters.map((ch: string, i: number) => {
             const at = i * 2;
@@ -56,16 +53,16 @@ export const Title: React.FC<{ ctx: ShotCtx }> = ({ ctx }) => {
       <Rays c1="#5B2BD6" c2="#7A3CF0" speed={0.5} />
       <AbsoluteFill style={{ background: 'radial-gradient(circle at 50% 45%, rgba(255,79,154,0.35), rgba(14,11,31,0.85) 70%)' }} />
       <div style={{ position: 'absolute', top: 420, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-        <Slam at={0} frame={frame} size={150} rot={-3}>С НУЛЯ</Slam>
-        <Slam at={4} frame={frame} size={120} color={COLORS.yellow} rot={2}>ДО</Slam>
-        <Slam at={8} frame={frame} size={112} color={COLORS.mint} rot={-2}>РЕЗУЛЬТАТА</Slam>
+        {(p.lines || [['С НУЛЯ', 150], ['ДО', 120], ['РЕЗУЛЬТАТА', 112]]).map(([txt, size]: [string, number], i: number) => (
+          <Slam key={i} at={i * 4} frame={frame} size={size} color={['#fff', COLORS.yellow, COLORS.mint, COLORS.pink][i % 4]} rot={i % 2 ? 2 : -3}>{txt}</Slam>
+        ))}
       </div>
       {frame >= 14 && (
         <div style={{
           position: 'absolute', top: 960, left: '50%', transform: `translateX(-50%) scale(${pop(frame, 14, 8)}) rotate(-4deg)`,
           background: COLORS.pink, color: '#fff', fontFamily: FONT.title, fontWeight: 900, fontSize: 54, padding: '14px 40px', borderRadius: 20,
-          border: '6px solid #000', boxShadow: '0 10px 0 #000',
-        }}>ЭПИЗОД {ep.episodeNumber}</div>
+          border: '6px solid #000', boxShadow: '0 10px 0 #000', whiteSpace: 'nowrap',
+        }}>{p.chip || `ЭПИЗОД ${ep.episodeNumber}`}</div>
       )}
       <Confetti at={1} />
       <Vignette strength={0.5} />
@@ -162,6 +159,33 @@ export const Verdict: React.FC<{ ctx: ShotCtx }> = ({ ctx }) => {
         </>
       )}
       <Vignette strength={0.6} />
+    </AbsoluteFill>
+  );
+};
+
+/** Telegram-channel call-to-action card (generic styling, no logos). */
+export const TgCard: React.FC<{ ctx: ShotCtx }> = ({ ctx }) => {
+  const frame = useCurrentFrame();
+  const p = ctx.shot.props || {};
+  const items: string[] = p.items || ['📜 Все промты', '📊 Честные цифры', '🐞 Баги и фиксы', '🎮 Весь путь игры'];
+  const step = Math.max(4, Math.floor((ctx.dur - 16) / items.length));
+  return (
+    <AbsoluteFill style={{ background: 'radial-gradient(circle at 50% 25%, #2AA3E6, #0B2A4A 70%)' }}>
+      <Grid color="rgba(255,255,255,0.06)" />
+      <div style={{ position: 'absolute', top: 300, width: '100%', display: 'flex', justifyContent: 'center', transform: `scale(${pop(frame, 0, 9)}) rotate(${Math.sin(frame / 6) * 4}deg)` }}>
+        <div style={{ width: 230, height: 230, borderRadius: 115, background: 'linear-gradient(135deg,#5CC8FF,#1E88D6)', display: 'grid', placeItems: 'center', fontSize: 130, fontFamily: FONT.emoji, boxShadow: '0 20px 60px rgba(0,0,0,0.4)', border: '8px solid #fff' }}>✈️</div>
+      </div>
+      <div style={{ position: 'absolute', top: 560, width: '100%', textAlign: 'center' }}>
+        <Slam at={3} frame={frame} size={96} color="#fff">{p.title || 'МОЙ ТГК'}</Slam>
+      </div>
+      <div style={{ position: 'absolute', top: 700, left: 110, right: 150, display: 'flex', flexDirection: 'column', gap: 18 }}>
+        {items.map((it, i) => frame >= 8 + i * step && (
+          <div key={i} style={{
+            transform: `translateX(${ease(frame, 8 + i * step, 14 + i * step, -700, 0)}px)`, background: 'rgba(255,255,255,0.95)', borderRadius: 24,
+            padding: '16px 28px', fontFamily: `${FONT.body}, ${FONT.emoji}`, fontWeight: 800, fontSize: 44, color: '#0B2A4A', boxShadow: '0 10px 0 rgba(0,0,0,0.25)',
+          }}>{it}</div>
+        ))}
+      </div>
     </AbsoluteFill>
   );
 };

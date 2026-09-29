@@ -12,10 +12,11 @@ export const ShotFx: React.FC<{ fx: string[]; seed: number; children: React.Reac
     transform += ` scale(${s})`;
   }
   if (fx.includes('whip')) {
-    const t = interpolate(frame, [0, 6], [1, 0], clamp);
+    // zoom-whip: slides in from the side while zoomed, so the frame is never empty
+    const t = interpolate(frame, [0, 6], [1, 0], { ...clamp, easing: (x) => 1 - Math.pow(1 - x, 2) });
     const dir = seed % 2 === 0 ? 1 : -1;
-    transform += ` translateX(${dir * t * t * W * 0.9}px) skewX(${dir * -t * 12}deg)`;
-    if (t > 0) filter += ` blur(${t * 26}px)`;
+    transform += ` translateX(${dir * t * W * 0.12}px) scale(${1 + 0.28 * t}) skewX(${dir * -t * 6}deg)`;
+    if (t > 0) filter += ` blur(${t * 22}px)`;
   }
   if (fx.includes('shake')) {
     const [x, y] = shakeXY(frame, 0, 14, 38, seed);

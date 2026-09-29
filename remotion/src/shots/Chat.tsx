@@ -8,9 +8,9 @@ type Msg = { who: 'me' | 'ai'; text: string; at: number; code?: string; speed?: 
 
 const SCRIPTS: Record<string, (ctx: ShotCtx) => Msg[]> = {
   coding: () => [
-    { who: 'me', text: 'сделай игру, где котики падают и сливаются в котиков побольше 🐱', at: 0 },
+    { who: 'me', text: 'сделай игру: покупаешь котиков, соединяешь одинаковых, а они приносят монетки 🐱', at: 0 },
     { who: 'ai', text: 'Отличная идея! Вот готовый код:', at: 6, speed: 2.2,
-      code: 'const cats = [];\nfunction merge(a, b) {\n  const tier = a.tier + 1;\n  spawnCat(tier, mid(a, b));\n  score += TIERS[tier].points;\n  playSound("meow");\n}' },
+      code: 'function merge(a, b) {\n  if (a.lvl !== b.lvl) return;\n  grid[b.cell] = newCat(a.lvl + 1);\n  income += INCOME[a.lvl + 1];\n  burstCoins(b.cell);\n}' },
   ],
   coding1: () => [
     { who: 'me', text: 'как выложить игру на Яндекс Игры? объясни как для чайника', at: 0 },

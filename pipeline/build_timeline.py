@@ -21,6 +21,7 @@ from asr import words_with_times  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 TOKEN_RE = re.compile(r"\[\[.*?\]\]|\S+")
+BAD_WORDS = re.compile(r"еба|ёба|бля|хуй|хуе|пизд|сука|муда", re.I)
 WORD_CHARS = re.compile(r"[0-9A-Za-zА-Яа-яЁё]")
 
 
@@ -93,9 +94,14 @@ def best_take(say, target, v, line, wav_path):
     for k in range(n):
         a = trim_silence(synth(text, v["engine"], speed, v.get("noise_scale"), v.get("noise_w")))
         hyp = transcribe(a, SR)[0]
+        if BAD_WORDS.search(hyp) and not BAD_WORDS.search(target):
+            print(f"    rejected take (sounds like profanity): {hyp}")
+            continue
         takes.append((take_score(target, hyp), -abs(len(a)), a, hyp))
         if takes[-1][0] >= 0.995:
             break
+    if not takes:
+        raise SystemExit(f"No acceptable take for: {say}")
     takes.sort(key=lambda x: (round(x[0], 3), x[1]), reverse=True)
     sc, _, a, hyp = takes[0]
     print(f"    take {sc:.3f} of {len(takes)}: {hyp}")

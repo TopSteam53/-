@@ -22,10 +22,9 @@ python pipeline/make_episode.py episodes/ep01 --draft   # быстрый чер�
 ## Новое видео
 
 1. **Записи.** Положи клипы в `footage/` с понятными именами, например `footage/moderation_screen.mp4`, `footage/gameplay_main.mp4`.
-   Файл в `footage/` всегда важнее автоматически записанного `footage/_generated/` с тем же именем.
-   Любой формат и ориентация — пайплайн сам обрежет под 9:16 и 30 fps.
-   *Для ep01 сейчас используются записи макета игры (`game/mock-murmerge`, `npm run record:gameplay`) —
-   положи свои `gameplay_main.mp4`, `gameplay_merge_closeup.mp4`, `gameplay_bug.mp4` в `footage/` и перерендерь.*
+   Подходит любой формат и ориентация: пайплайн сам приведёт клип к 9:16 и 30 fps, а края заполнит размытой копией.
+   Интерфейс телефона или браузера обрезается через `"footage": {"<клип>": {"crop": "w:h:x:y"}}` в `episode.json`.
+   Для ep01 это `footage/murmerge_play.mp4` с `crop 680:1167:20:168` (без панели Яндекса и рекламного баннера).
 2. **Эпизод.** Скопируй `episodes/ep01` → `episodes/ep02`, поменяй `id`, `episodeNumber` и `lines`.
 3. **Рендер.** `python pipeline/make_episode.py episodes/ep02` → `output/video_02.mp4`.
 
@@ -56,13 +55,14 @@ python pipeline/make_episode.py episodes/ep01 --draft   # быстрый чер�
 **Произношение.**
 - Ударение ставится знаком `´` после гласной: `черно́вике`.
 - Для новых слов можно подать фонемы espeak: `[[ murːmʲˈerʃ ]]`, а в `sub` написать «Мурмерж».
+- Если ASR слышит в дубле что-то похожее на мат, такой дубль отбрасывается автоматически.
 - Несколько произносимых слов, которые в субтитрах идут одним словом, склеиваются через `_`: `Чат_Джи_Пи_Ти` ↔ `ChatGPT`.
 
 **Типы планов** (`remotion/src/shots/`):
 
 | Тип | Что показывает | Параметры |
 |---|---|---|
-| `gameplay` | запись игры | `clip`, `from`, `zoom:[a,b]`, `focusY`, `dim`, `sparkles`, `hearts`, `hypno` |
+| `gameplay` | запись игры | `clip`, `from` (секунда исходника), `zoom:[a,b]`, `focus:[x,y]` (наезд на точку, 0..1), `target`, `rate` (скорость), `dim`, `sparkles`, `hearts` |
 | `aichat` | чат с нейросетью | `mode`: `coding` / `angry` / `fixagain`, `variant` |
 | `code` | редактор кода | `mode`: `typing` / `copypaste`, `variant` |
 | `crossout` | зачёркнутые слова | `items`, `flyaway` |
@@ -76,6 +76,7 @@ python pipeline/make_episode.py episodes/ep01 --draft   # быстрый чер�
 | `subscribe` | призыв подписаться | — |
 | `teaser` | анонс следующего эпизода | `episode`, `title` |
 | `verdict` | вердикт | — |
+| `tg` | карточка Telegram-канала | `title`, `items` |
 
 **Эффекты переходов** (`fx`): `punch`, `whip`, `flash`, `shake`, `glitch`. На `boom` камера трясётся автоматически.
 **SFX:** `assets/sfx/index.json` (вжухи, бум, клик, поп, дзинь, ошибка, глитч, грустный тромбон, скретч, райзер и др.).
@@ -91,9 +92,8 @@ python pipeline/make_episode.py episodes/ep01 --draft   # быстрый чер�
 ```
 episodes/<ep>/episode.json   сценарий + раскадровка
 episodes/<ep>/script.md      человекочитаемый сценарий, варианты хуков
-footage/                     твои записи (перекрывают footage/_generated/)
-game/mock-murmerge/          макет игры для автозаписи геймплея
-pipeline/                    tts, asr, build_timeline, mix, make_episode, audio/, record_gameplay.mjs
+footage/                     твои записи
+pipeline/                    tts, asr, build_timeline, mix, make_episode, audio/
 remotion/                    React-композиция
 assets/music, assets/sfx     сгенерированные звуки
 output/                      готовые видео и post.md

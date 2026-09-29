@@ -12,8 +12,6 @@ fi
 pip install -q piper-tts sherpa-onnx soundfile numpy scipy pyloudnorm librosa
 
 (cd remotion && npm install --no-audit --no-fund)
-(cd game/mock-murmerge && npm install --no-audit --no-fund) || true
-npm install --no-audit --no-fund || true   # root: playwright for gameplay recording
 
 mkdir -p models && cd models
 REL=https://github.com/k2-fsa/sherpa-onnx/releases/download

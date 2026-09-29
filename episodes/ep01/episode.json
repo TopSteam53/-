@@ -1,8 +1,15 @@
 {
   "id": "ep01",
   "episodeNumber": 1,
-  "series": "С НУЛЯ ДО РЕЗУЛЬТАТА",
+  "series": "С НУЛЯ ДО ЗАРАБОТКА",
   "gameName": "МУРМЕРЖ",
+  "mainClip": "murmerge_play",
+  "footage": {
+    "murmerge_play": {
+      "crop": "680:1167:20:168",
+      "note": "обрезаны панель браузера Яндекса и рекламный баннер"
+    }
+  },
   "voice": {
     "engine": "piper:denis",
     "speed": 1.13,
@@ -17,49 +24,48 @@
     "duckDb": -8,
     "cues": {
       "break": [
-        "zero",
-        5
+        "code",
+        0
       ],
       "build": [
-        "goal",
-        4
+        "money",
+        0
       ],
       "drop": [
-        "cta",
+        "tg",
         0
       ],
       "outro": [
-        "next",
-        7
+        "sub",
+        3
       ]
     }
   },
   "leadIn": 0.32,
-  "tail": 1.6,
+  "tail": 1.5,
   "defaultPause": 0.12,
-  "hud": {
-    "earnedFromLine": "numbers",
-    "earnedFromWord": 5,
-    "amount": "0 ₽"
-  },
   "lines": [
     {
       "id": "hook",
-      "say": "Эту игру написала нейросеть.",
-      "pause": 0.1,
+      "say": "Эту игру я не писал.",
+      "pause": 0.08,
       "emphasis": [
-        3
+        4
       ],
       "shots": [
         {
           "w": 0,
           "type": "gameplay",
           "props": {
-            "clip": "gameplay_main",
-            "from": 6,
+            "clip": "murmerge_play",
+            "from": 0.1,
             "zoom": [
               1.35,
-              1.15
+              1.12
+            ],
+            "focus": [
+              0.4,
+              0.42
             ]
           },
           "fx": [
@@ -69,9 +75,19 @@
           "sfx": [
             "boom"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "vibe",
+      "say": "Я её... завайбкодил!",
+      "pause": 0.15,
+      "emphasis": [
+        2
+      ],
+      "shots": [
         {
-          "w": 3,
+          "w": 0,
           "type": "aichat",
           "props": {
             "mode": "coding"
@@ -83,49 +99,16 @@
             "whoosh_1"
           ]
         }
-      ]
-    },
-    {
-      "id": "copy",
-      "say": "А я только копировал код... и ругался в чате.",
-      "pause": 0.15,
-      "emphasis": [
-        3,
-        6
       ],
-      "shots": [
-        {
-          "w": 0,
-          "type": "code",
-          "props": {
-            "mode": "copypaste"
-          },
-          "fx": [
-            "whip"
-          ],
-          "sfx": [
-            "whoosh_2"
-          ]
-        },
-        {
-          "w": 5,
-          "type": "aichat",
-          "props": {
-            "mode": "angry"
-          },
-          "fx": [
-            "punch"
-          ],
-          "sfx": [
-            "notify"
-          ]
-        }
-      ]
+      "sub": "Я её завайбкодил!",
+      "speed": 0.92,
+      "takes": 12,
+      "target": "я ее завайбкодил"
     },
     {
-      "id": "notguru",
-      "say": "Я не эксперт и не крутой программист.",
-      "pause": 0.1,
+      "id": "challenge",
+      "say": "И запускаю челлендж: с нуля — до заработка на Яндекс Играх.",
+      "pause": 0.25,
       "emphasis": [
         2,
         6
@@ -133,98 +116,13 @@
       "shots": [
         {
           "w": 0,
-          "type": "crossout",
-          "props": {
-            "items": [
-              "ЭКСПЕРТ",
-              "ГУРУ",
-              "СЕНЬОР-РАЗРАБ"
-            ]
-          },
-          "fx": [
-            "whip"
-          ],
-          "sfx": [
-            "whoosh_3"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "party",
-      "say": "Обычный парень, немного кода. И две нейросети: Клод и Чат_Джи_Пи_Ти.",
-      "sub": "Обычный парень, немного кода и две нейросети — Claude и ChatGPT.",
-      "pause": 0.1,
-      "emphasis": [
-        0,
-        7,
-        9
-      ],
-      "shots": [
-        {
-          "w": 0,
-          "type": "party",
-          "props": {
-            "reveal": [
-              0,
-              99,
-              99
-            ],
-            "focus": "me"
-          },
-          "fx": [
-            "punch"
-          ],
-          "sfx": [
-            "pop"
-          ]
-        },
-        {
-          "w": 5,
-          "type": "party",
-          "props": {
-            "reveal": [
-              -1,
-              7,
-              9
-            ]
-          },
-          "fx": [
-            "whip"
-          ],
-          "sfx": [
-            "whoosh_1"
-          ]
-        }
-      ],
-      "sfx": [
-        {
-          "w": 7,
-          "name": "pop_2"
-        },
-        {
-          "w": 9,
-          "name": "pop_2"
-        }
-      ]
-    },
-    {
-      "id": "series",
-      "say": "И я запускаю эксперимент: «С нуля до результата».",
-      "pause": 0.25,
-      "emphasis": [
-        3
-      ],
-      "shots": [
-        {
-          "w": 0,
           "type": "gameplay",
           "props": {
-            "clip": "gameplay_merge_closeup",
-            "from": 1,
+            "clip": "murmerge_play",
+            "from": 28,
             "zoom": [
               1.0,
-              1.25
+              1.2
             ],
             "dim": 0.35
           },
@@ -232,14 +130,30 @@
             "whip"
           ],
           "sfx": [
+            "whoosh_2",
             "riser"
           ]
         },
         {
-          "w": 4,
+          "w": 3,
           "type": "title",
           "props": {
-            "kind": "series"
+            "kind": "series",
+            "lines": [
+              [
+                "ЧЕЛЛЕНДЖ",
+                112
+              ],
+              [
+                "С НУЛЯ",
+                150
+              ],
+              [
+                "ДО ЗАРАБОТКА",
+                96
+              ]
+            ],
+            "chip": "НА ЯНДЕКС ИГРАХ"
           },
           "fx": [
             "flash",
@@ -253,13 +167,363 @@
       ]
     },
     {
-      "id": "process",
-      "say": "Делаю игры с нейронками, выкладываю на Яндекс Игры и показываю весь путь:",
+      "id": "game",
+      "say": "Игра — [[ murːmʲˈerʃ ]].",
+      "sub": "Игра — Мурмерж.",
+      "target": "игра мурмерж",
+      "takes": 12,
+      "speed": 1.0,
+      "pause": 0.2,
+      "emphasis": [
+        1
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "title",
+          "props": {
+            "kind": "game",
+            "clip": "murmerge_play",
+            "from": 29
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_3"
+          ],
+          "hideSubs": true
+        }
+      ],
+      "sfx": [
+        {
+          "w": 1,
+          "name": "hit"
+        },
+        {
+          "w": 1,
+          "name": "sparkle"
+        }
+      ]
+    },
+    {
+      "id": "merge",
+      "say": "Покупаешь котиков, соединяешь одинаковых — и получаешь котика круче.",
+      "pause": 0.12,
+      "emphasis": [
+        2,
+        7
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 14.4,
+            "zoom": [
+              1.15,
+              1.25
+            ],
+            "focus": [
+              0.5,
+              0.5
+            ]
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_1",
+            "click"
+          ]
+        },
+        {
+          "w": 2,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 16.5,
+            "zoom": [
+              1.4,
+              1.55
+            ],
+            "focus": [
+              0.5,
+              0.42
+            ]
+          },
+          "fx": [
+            "punch"
+          ],
+          "sfx": [
+            "pop"
+          ]
+        },
+        {
+          "w": 5,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 19.6,
+            "zoom": [
+              1.45,
+              1.6
+            ],
+            "focus": [
+              0.55,
+              0.38
+            ],
+            "sparkles": true
+          },
+          "fx": [
+            "punch"
+          ],
+          "sfx": [
+            "pop_2",
+            "sparkle"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "income",
+      "say": "Котики приносят монетки. Даже когда ты не в игре.",
+      "pause": 0.12,
+      "emphasis": [
+        2,
+        8
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 29.4,
+            "zoom": [
+              1.8,
+              2.0
+            ],
+            "focus": [
+              0.5,
+              0.09
+            ],
+            "target": 0.2
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_2"
+          ]
+        },
+        {
+          "w": 3,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 6.1,
+            "zoom": [
+              1.75,
+              1.9
+            ],
+            "focus": [
+              0.45,
+              0.71
+            ]
+          },
+          "fx": [
+            "punch"
+          ],
+          "sfx": [
+            "hit"
+          ]
+        }
+      ],
+      "sfx": [
+        {
+          "w": 2,
+          "name": "ding"
+        }
+      ]
+    },
+    {
+      "id": "upgrades",
+      "say": "Монетки тратишь на улучшения...",
       "pause": 0.05,
       "emphasis": [
+        3
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 7.2,
+            "zoom": [
+              1.12,
+              1.22
+            ],
+            "focus": [
+              0.5,
+              0.3
+            ]
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_3"
+          ]
+        }
+      ],
+      "sfx": [
+        {
+          "w": 1,
+          "name": "click"
+        },
+        {
+          "w": 3,
+          "name": "click"
+        }
+      ]
+    },
+    {
+      "id": "broke",
+      "say": "пока не кончатся.",
+      "pause": 0.25,
+      "emphasis": [
+        2
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 12.2,
+            "zoom": [
+              1.6,
+              1.8
+            ],
+            "focus": [
+              0.5,
+              0.18
+            ],
+            "target": 0.3
+          },
+          "fx": [
+            "punch"
+          ],
+          "sfx": [
+            "error"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kotopedia",
+      "say": "Собираешь котопедию — у меня пока девять из восемнадцати.",
+      "pause": 0.15,
+      "emphasis": [
+        1,
+        5,
+        7
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 2.8,
+            "zoom": [
+              1.12,
+              1.3
+            ],
+            "focus": [
+              0.5,
+              0.41
+            ],
+            "rate": 0.5
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "newcat",
+      "say": "А иногда выпадает новый котик. Кот-учёный!",
+      "pause": 0.3,
+      "emphasis": [
         3,
-        6,
-        11
+        5
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 23.4,
+            "zoom": [
+              1.2,
+              1.35
+            ],
+            "focus": [
+              0.5,
+              0.45
+            ]
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_2"
+          ]
+        },
+        {
+          "w": 3,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 24.85,
+            "zoom": [
+              1.25,
+              1.4
+            ],
+            "focus": [
+              0.5,
+              0.44
+            ],
+            "sparkles": true
+          },
+          "fx": [
+            "flash",
+            "punch"
+          ],
+          "sfx": [
+            "sparkle",
+            "ding"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "code",
+      "say": "Код, баги, куча промтов — всё через нейросеть.",
+      "pause": 0.2,
+      "emphasis": [
+        1,
+        3,
+        6
       ],
       "shots": [
         {
@@ -277,64 +541,47 @@
           ]
         },
         {
-          "w": 4,
-          "type": "upload",
-          "props": {},
+          "w": 1,
+          "type": "aichat",
+          "props": {
+            "mode": "angry"
+          },
           "fx": [
-            "punch"
+            "punch",
+            "glitch"
           ],
           "sfx": [
-            "click"
+            "error"
           ]
         },
         {
-          "w": 8,
-          "type": "roadmap",
+          "w": 2,
+          "type": "aichat",
           "props": {
-            "lightOn": []
+            "mode": "fixagain"
           },
           "fx": [
             "whip"
           ],
           "sfx": [
-            "whoosh_2"
+            "notify"
           ]
         }
-      ]
+      ],
+      "takes": 10
     },
     {
-      "id": "numbers",
-      "say": "идеи, баги, модерацию... и честные цифры: заработал или нет.",
+      "id": "money",
+      "say": "Сколько заработаю — покажу честно, в цифрах.",
       "pause": 0.2,
       "emphasis": [
         1,
-        5,
-        6
+        3,
+        5
       ],
       "shots": [
         {
           "w": 0,
-          "type": "roadmap",
-          "props": {
-            "lightOn": [
-              [
-                0,
-                0
-              ],
-              [
-                1,
-                2
-              ],
-              [
-                2,
-                3
-              ]
-            ],
-            "continue": true
-          }
-        },
-        {
-          "w": 4,
           "type": "money",
           "props": {
             "mode": "question"
@@ -346,353 +593,44 @@
           "sfx": [
             "hit"
           ]
-        }
-      ],
-      "sfx": [
-        {
-          "w": 0,
-          "name": "pop"
         },
         {
-          "w": 1,
-          "name": "glitch"
-        },
-        {
-          "w": 2,
-          "name": "pop_2"
-        },
-        {
-          "w": 6,
-          "name": "ding"
-        }
-      ]
-    },
-    {
-      "id": "game",
-      "say": "Первая игра — [[ murːmʲˈerʃ ]].",
-      "sub": "Первая игра — Мурмерж.",
-      "pause": 0.2,
-      "emphasis": [
-        2
-      ],
-      "shots": [
-        {
-          "w": 0,
-          "type": "gameplay",
-          "props": {
-            "clip": "gameplay_main",
-            "from": 1,
-            "zoom": [
-              1.1,
-              1.0
-            ]
-          },
-          "fx": [
-            "whip"
-          ],
-          "sfx": [
-            "whoosh_3"
-          ]
-        },
-        {
-          "w": 2,
-          "type": "title",
-          "props": {
-            "kind": "game",
-            "clip": "gameplay_main",
-            "from": 2
-          },
-          "fx": [
-            "flash",
-            "punch"
-          ],
-          "sfx": [
-            "boom",
-            "sparkle"
-          ],
-          "hideSubs": true
-        }
-      ],
-      "speed": 1.0,
-      "takes": 12,
-      "target": "первая игра мурмерж"
-    },
-    {
-      "id": "gameplay",
-      "say": "Котики падают, сливаются в котиков побольше... и залипаешь.",
-      "pause": 0.15,
-      "emphasis": [
-        0,
-        2,
-        7
-      ],
-      "shots": [
-        {
-          "w": 0,
-          "type": "gameplay",
-          "props": {
-            "clip": "gameplay_merge_closeup",
-            "from": 0,
-            "zoom": [
-              1.45,
-              1.3
-            ],
-            "focusY": 0.62
-          },
-          "fx": [
-            "punch"
-          ],
-          "sfx": [
-            "pop"
-          ]
-        },
-        {
-          "w": 2,
-          "type": "gameplay",
-          "props": {
-            "clip": "gameplay_main",
-            "from": 14,
-            "zoom": [
-              1.2,
-              1.4
-            ],
-            "sparkles": true
-          },
-          "fx": [
-            "punch"
-          ],
-          "sfx": [
-            "pop_2",
-            "sparkle"
-          ]
-        },
-        {
-          "w": 6,
-          "type": "gameplay",
-          "props": {
-            "clip": "gameplay_main",
-            "from": 19,
-            "zoom": [
-              1.0,
-              1.12
-            ],
-            "hypno": true
-          },
-          "fx": []
-        }
-      ]
-    },
-    {
-      "id": "bugs",
-      "say": "Выглядит мило. Но за кадром — красная консоль и моё вечное: «исправь, пожалуйста, ещё раз».",
-      "pause": 0.25,
-      "emphasis": [
-        1,
-        5,
-        6,
-        10
-      ],
-      "shots": [
-        {
-          "w": 0,
-          "type": "gameplay",
-          "props": {
-            "clip": "gameplay_merge_closeup",
-            "from": 4,
-            "zoom": [
-              1.2,
-              1.35
-            ],
-            "hearts": true
-          },
-          "fx": [
-            "whip"
-          ],
-          "sfx": [
-            "sparkle"
-          ]
-        },
-        {
-          "w": 2,
-          "type": "bug",
-          "props": {
-            "clip": "gameplay_bug",
-            "from": 0
-          },
-          "fx": [
-            "glitch",
-            "shake"
-          ],
-          "sfx": [
-            "record_scratch",
-            "error"
-          ]
-        },
-        {
-          "w": 10,
-          "type": "aichat",
-          "props": {
-            "mode": "fixagain"
-          },
-          "fx": [
-            "punch"
-          ],
-          "sfx": [
-            "notify"
-          ]
-        }
-      ],
-      "sfx": [
-        {
-          "w": 5,
-          "name": "glitch"
-        },
-        {
-          "w": 12,
-          "name": "notify"
-        }
-      ]
-    },
-    {
-      "id": "zero",
-      "say": "Сейчас игра в черно́вике. Заработано — ноль рублей.",
-      "pause": 0.35,
-      "emphasis": [
-        3,
-        5,
-        6
-      ],
-      "shots": [
-        {
-          "w": 0,
-          "type": "status",
-          "props": {
-            "status": "ЧЕРНОВИК"
-          },
-          "fx": [
-            "whip"
-          ],
-          "sfx": [
-            "whoosh_1",
-            "hit"
-          ]
-        },
-        {
-          "w": 5,
-          "type": "money",
-          "props": {
-            "mode": "zero"
-          },
-          "fx": [
-            "punch"
-          ],
-          "sfx": [
-            "sad_trombone"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "goal",
-      "say": "Цели стать миллионером нет. Хочу честно проверить, сколько сейчас можно сделать с нейросетями... и можно ли на этом заработать.",
-      "pause": 0.2,
-      "emphasis": [
-        2,
-        5,
-        12,
-        18
-      ],
-      "shots": [
-        {
-          "w": 0,
-          "type": "crossout",
-          "props": {
-            "items": [
-              "МИЛЛИОНЕР 💸"
-            ],
-            "flyaway": true
-          },
-          "fx": [
-            "whip"
-          ],
-          "sfx": [
-            "whoosh_2"
-          ]
-        },
-        {
-          "w": 4,
-          "type": "gameplay",
-          "props": {
-            "clip": "gameplay_main",
-            "from": 9,
-            "zoom": [
-              1.05,
-              1.2
-            ]
-          },
-          "fx": [
-            "whip"
-          ],
-          "sfx": [
-            "whoosh_1"
-          ]
-        },
-        {
-          "w": 7,
-          "type": "code",
-          "props": {
-            "mode": "typing",
-            "variant": 1
-          },
-          "fx": [
-            "whip"
-          ],
-          "sfx": [
-            "whoosh_3"
-          ]
-        },
-        {
-          "w": 10,
-          "type": "aichat",
-          "props": {
-            "mode": "coding",
-            "variant": 1
-          },
-          "fx": [
-            "whip"
-          ],
-          "sfx": [
-            "whoosh_2"
-          ]
-        },
-        {
-          "w": 13,
+          "w": 3,
           "type": "money",
           "props": {
             "mode": "chart"
           },
           "fx": [
-            "punch"
+            "whip"
           ],
           "sfx": [
-            "riser"
+            "whoosh_3"
           ]
         }
       ]
     },
     {
-      "id": "cta",
-      "say": "Подпишись, чтобы следить за экспериментом.",
-      "pause": 0.25,
+      "id": "tg",
+      "say": "А все промты и результаты — в моём [[ tˌɛɡˌɛkˈa ]]. Ссылка в профиле.",
+      "pause": 0.2,
       "emphasis": [
-        0,
-        4
+        2,
+        7,
+        10
       ],
       "shots": [
         {
           "w": 0,
-          "type": "subscribe",
-          "props": {},
+          "type": "tg",
+          "props": {
+            "title": "МОЙ ТГК",
+            "items": [
+              "📜 Все промты",
+              "📊 Честные цифры",
+              "🐞 Баги и фиксы",
+              "👤 Ссылка в профиле"
+            ]
+          },
           "fx": [
             "flash",
             "punch"
@@ -704,50 +642,73 @@
       ],
       "sfx": [
         {
+          "w": 2,
+          "name": "pop"
+        },
+        {
+          "w": 4,
+          "name": "pop_2"
+        },
+        {
+          "w": 7,
+          "name": "ding"
+        }
+      ],
+      "sub": "А все промты и результаты — в моём ТГК. Ссылка в профиле.",
+      "target": "а все промты и результаты в моем тгк ссылка в профиле"
+    },
+    {
+      "id": "sub",
+      "say": "Подпишись, чтобы увидеть, чем закончится челлендж.",
+      "pause": 0.0,
+      "emphasis": [
+        0,
+        5
+      ],
+      "shots": [
+        {
+          "w": 0,
+          "type": "subscribe",
+          "props": {},
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_1"
+          ]
+        },
+        {
+          "w": 3,
+          "type": "gameplay",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 30.2,
+            "zoom": [
+              1.15,
+              1.3
+            ],
+            "focus": [
+              0.5,
+              0.45
+            ],
+            "hearts": true
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_2"
+          ]
+        }
+      ],
+      "sfx": [
+        {
           "w": 1,
           "name": "click"
         },
         {
           "w": 2,
           "name": "ding"
-        }
-      ]
-    },
-    {
-      "id": "next",
-      "say": "В следующем видео — отправляю котов на модерацию. Пропустят или нет?",
-      "pause": 0.0,
-      "emphasis": [
-        4,
-        6,
-        7
-      ],
-      "shots": [
-        {
-          "w": 0,
-          "type": "teaser",
-          "props": {
-            "episode": 2,
-            "title": "МОДЕРАЦИЯ"
-          },
-          "fx": [
-            "whip",
-            "glitch"
-          ],
-          "sfx": [
-            "whoosh_3"
-          ]
-        },
-        {
-          "w": 7,
-          "type": "verdict",
-          "props": {},
-          "fx": [
-            "punch"
-          ],
-          "sfx": [
-            "riser"
-          ]
         }
       ]
     }
