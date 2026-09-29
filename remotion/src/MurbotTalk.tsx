@@ -94,8 +94,8 @@ export const MurbotTalk: React.FC<{ timeline: Timeline }> = ({ timeline: tl }) =
       )}
 
       {p.caption && (
-        <div style={{ position: 'absolute', right: 110, top: 150, transform: `scale(${pop(frame, f(shot.start) + 4, 8)}) rotate(4deg)` }}>
-          <span style={{ fontFamily: FONT.title, fontWeight: 900, fontSize: 72, color: COLORS.yellow, ...stroke(10), whiteSpace: 'nowrap' }}>{p.caption}</span>
+        <div style={{ position: 'absolute', right: 90, top: 300, width: 520, textAlign: 'center', transform: `scale(${pop(frame, f(shot.start) + 4, 8)}) rotate(4deg)` }}>
+          <span style={{ fontFamily: FONT.title, fontWeight: 900, fontSize: 64, lineHeight: 1.15, color: COLORS.yellow, ...stroke(10) }}>{p.caption}</span>
         </div>
       )}
 
