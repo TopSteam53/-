@@ -393,6 +393,31 @@
           "sfx": [
             "whoosh_3"
           ]
+        },
+        {
+          "w": 4,
+          "type": "phone",
+          "props": {
+            "clip": "murmerge_play",
+            "from": 1.0,
+            "rotY": [
+              -22,
+              -8
+            ],
+            "tap": {
+              "x": 0.9,
+              "y": 0.89,
+              "w": 5
+            },
+            "label": "✅ ПО ЖЕЛАНИЮ",
+            "bg": "radial-gradient(circle at 50% 35%, #1F5C3A, #0B1F14 70%)"
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_3"
+          ]
         }
       ],
       "sfx": [
@@ -438,7 +463,13 @@
                 "hi": true
               }
             ]
-          }
+          },
+          "fx": [
+            "whip"
+          ],
+          "sfx": [
+            "whoosh_1"
+          ]
         }
       ],
       "sfx": [
