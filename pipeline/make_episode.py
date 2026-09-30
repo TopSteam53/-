@@ -122,6 +122,9 @@ def main():
         cmd.append(f"--frames={a.frames}")
     run(cmd, cwd=ROOT / "remotion")
     run([sys.executable, ROOT / "pipeline/mix.py", build / "timeline.json", build / "mix.wav"])
+    if tl["episode"].get("cover"):
+        cover = ROOT / "output" / f"cover_{ep['episodeNumber']:02d}.png"
+        run(["node", ROOT / "remotion/render.mjs", build / "timeline.json", cover, f"--cover={cover}"], cwd=ROOT / "remotion")
     out = Path(a.out) if a.out else ROOT / "output" / f"video_{ep['episodeNumber']:02d}.mp4"
     out.parent.mkdir(parents=True, exist_ok=True)
     run(["ffmpeg", "-y", "-loglevel", "error", "-i", silent, "-i", build / "mix.wav", "-map", "0:v", "-map", "1:a",

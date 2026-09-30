@@ -28,6 +28,14 @@ const inputProps = { timeline };
 const composition = await selectComposition({ serveUrl, id: timeline.episode?.composition || 'Main', inputProps, browserExecutable });
 const scale = opts.scale ? Number(opts.scale) : 1;
 
+if (opts.cover) {
+  const cover = timeline.episode?.cover || {};
+  const comp = await selectComposition({ serveUrl, id: 'Cover', inputProps: { cover }, browserExecutable });
+  await renderStill({ composition: comp, serveUrl, frame: 0, inputProps: { cover }, output: opts.cover, imageFormat: 'png', browserExecutable });
+  console.log('cover', opts.cover);
+  process.exit(0);
+}
+
 if (opts.stills) {
   const dir = opts['stills-dir'] || path.dirname(outPath);
   fs.mkdirSync(dir, { recursive: true });

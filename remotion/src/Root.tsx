@@ -15,6 +15,7 @@ import { Composition, continueRender, delayRender, staticFile } from 'remotion';
 import { Main } from './Main';
 import { MascotSheet } from './MascotSheet';
 import { MascotTalk } from './MascotTalk';
+import { Cover } from './Cover';
 import type { Timeline } from './types';
 
 const fontHandle = typeof document !== 'undefined' ? delayRender('fonts') : null;
@@ -45,6 +46,7 @@ export const Root: React.FC = () => (
       return { durationInFrames: Math.ceil(timeline!.duration * 30), props: { timeline } };
     }}
   />
+  <Composition id="Cover" component={Cover as any} fps={30} width={1080} height={1920} durationInFrames={1} defaultProps={{ cover: {} }} />
   <Composition id="MascotSheet" component={MascotSheet} fps={30} width={1920} height={1080} durationInFrames={60} />
   <Composition
     id="Main"

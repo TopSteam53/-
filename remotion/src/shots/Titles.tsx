@@ -53,7 +53,7 @@ export const Title: React.FC<{ ctx: ShotCtx }> = ({ ctx }) => {
       <Rays c1="#5B2BD6" c2="#7A3CF0" speed={0.5} />
       <AbsoluteFill style={{ background: 'radial-gradient(circle at 50% 45%, rgba(255,79,154,0.35), rgba(14,11,31,0.85) 70%)' }} />
       <div style={{ position: 'absolute', top: 420, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-        {(p.lines || [['С НУЛЯ', 150], ['ДО', 120], ['РЕЗУЛЬТАТА', 112]]).map(([txt, size]: [string, number], i: number) => (
+        {(p.lines || [['С НУЛЯ', 150], ['ДО', 120], ['ЗАРАБОТКА', 112]]).map(([txt, size]: [string, number], i: number) => (
           <Slam key={i} at={i * 4} frame={frame} size={size} color={['#fff', COLORS.yellow, COLORS.mint, COLORS.pink][i % 4]} rot={i % 2 ? 2 : -3}>{txt}</Slam>
         ))}
       </div>

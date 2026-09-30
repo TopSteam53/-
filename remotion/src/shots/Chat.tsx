@@ -71,7 +71,10 @@ export const Chat: React.FC<{ ctx: ShotCtx }> = ({ ctx }) => {
   const frame = useCurrentFrame();
   const p = ctx.shot.props || {};
   const key = p.mode + (p.variant ? String(p.variant) : '');
-  const msgs = (SCRIPTS[key] || SCRIPTS.coding)(ctx);
+  const msgs: Msg[] = p.messages
+    ? p.messages.map((m: any) => ({ ...m, at: m.w != null ? (m.w < 0 ? -20 : Math.max(0, ctx.wordFrame(m.w))) : m.at || 0 }))
+    : (SCRIPTS[key] || SCRIPTS.coding)(ctx);
+  const stickerAt = p.sticker ? (p.sticker.w != null ? Math.max(0, ctx.wordFrame(p.sticker.w)) : 10) : -1;
   const visible = msgs.filter((m) => frame >= m.at);
   const shake = key === 'angry' && frame >= 0 && frame < 10 ? Math.sin(frame * 3) * 12 : 0;
   return (
@@ -79,7 +82,7 @@ export const Chat: React.FC<{ ctx: ShotCtx }> = ({ ctx }) => {
       <Grid />
       <div style={{
         position: 'absolute', left: 50, right: 90, top: 330, height: 790, borderRadius: 44, background: 'rgba(20,16,42,0.92)',
-        border: '3px solid #3A3170', boxShadow: '0 30px 80px rgba(0,0,0,0.5)', overflow: 'hidden', transform: `translateX(${shake}px)`,
+        border: '3px solid #3A3170', boxShadow: '0 30px 80px rgba(0,0,0,0.5)', overflow: 'hidden', transform: `translateX(${shake}px) scale(${p.scale || 1})`, transformOrigin: '50% 85%',
       }}>
         <div style={{ height: 96, display: 'flex', alignItems: 'center', gap: 18, padding: '0 34px', borderBottom: '2px solid #3A3170', fontFamily: FONT.body, color: '#fff' }}>
           <div style={{ width: 54, height: 54, borderRadius: 27, background: 'linear-gradient(135deg,#35F2B0,#4DA3FF)', display: 'grid', placeItems: 'center', fontSize: 30 }}>✦</div>
@@ -87,9 +90,14 @@ export const Chat: React.FC<{ ctx: ShotCtx }> = ({ ctx }) => {
           <div style={{ marginLeft: 'auto', color: COLORS.mint, fontSize: 26, fontWeight: 700 }}>● онлайн</div>
         </div>
         <div style={{ position: 'absolute', left: 30, right: 30, bottom: 30, top: 120, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', gap: 24 }}>
-          {visible.map((m, i) => <Bubble key={i} m={m} frame={frame} />)}
+          {visible.slice(-(p.maxVisible || 6)).map((m, i) => <Bubble key={i} m={m} frame={frame} />)}
         </div>
       </div>
+      {p.sticker && frame >= stickerAt && (
+        <div style={{ position: 'absolute', right: 110, top: 300, transform: `scale(${pop(frame, stickerAt, 8)}) rotate(10deg)`, zIndex: 50 }}>
+          <span style={{ fontFamily: FONT.title, fontWeight: 900, fontSize: p.sticker.size || 150, color: p.sticker.color || COLORS.red, WebkitTextStroke: '14px #000', paintOrder: 'stroke fill' as any, textShadow: '0 12px 0 #000' }}>{p.sticker.text}</span>
+        </div>
+      )}
     </AbsoluteFill>
   );
 };

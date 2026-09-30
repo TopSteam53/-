@@ -11,12 +11,15 @@ import { Gameplay } from './shots/Gameplay';
 import { Money } from './shots/Money';
 import { Subscribe, Teaser, TgCard, Title, Verdict } from './shots/Titles';
 import { BigText, CoinRain, Flow, Formula, ListCard, Phone } from './shots/Broll';
+import { bleepActive, Censor, CodeMeme, CommentAsk, ConsoleShot, CounterShot, ExpectReality, FaceTeaser, MemeZoom, SplitBrain, Versus } from './shots/Meme';
 import type { ShotCtx, Timeline } from './types';
 
 const SHOTS: Record<string, React.FC<{ ctx: ShotCtx }>> = {
   gameplay: Gameplay, aichat: Chat, code: Code, crossout: Crossout, party: Party, title: Title, upload: Upload,
   roadmap: Roadmap, money: Money, bug: Bug, status: Status, subscribe: Subscribe, teaser: Teaser, verdict: Verdict, tg: TgCard,
   phone: Phone, coins: CoinRain, big: BigText, list: ListCard, flow: Flow, formula: Formula,
+  meme: MemeZoom, versus: Versus, split: SplitBrain, expect: ExpectReality, face: FaceTeaser, comment: CommentAsk,
+  console: ConsoleShot, codememe: CodeMeme, counter: CounterShot,
 };
 
 const NO_HUD = new Set(['title', 'subscribe', 'teaser', 'verdict', 'money', 'status']);
@@ -41,6 +44,30 @@ const Hud: React.FC<{ tl: Timeline }> = ({ tl }) => {
       <span style={{ color: COLORS.yellow }}>{tl.hud.amount}</span>
     </div>
   );
+};
+
+/** "#N" listicle chip, shown for shots whose line has props.num (countdown formats keep people to the end) */
+const ListNum: React.FC<{ tl: Timeline }> = ({ tl }) => {
+  const frame = useCurrentFrame();
+  const t = frame / FPS;
+  const line = tl.lines.find((l) => t >= l.start - 0.05 && t < l.end + 0.4);
+  const num = line ? tl.episode.lines.find((x: any) => x.id === line.id)?.num : null;
+  if (num == null) return null;
+  const firstLine = tl.lines.find((l) => tl.episode.lines.find((x: any) => x.id === l.id)?.num === num)!;
+  const at = f(firstLine.start);
+  return (
+    <div style={{
+      position: 'absolute', left: 40, top: 236, transform: `scale(${pop(frame, at, 8)}) rotate(-4deg)`, transformOrigin: '0 50%', zIndex: 600,
+      background: COLORS.yellow, color: '#1B1636', fontFamily: FONT.title, fontWeight: 900, fontSize: 72, padding: '4px 26px', borderRadius: 20,
+      border: '7px solid #000', boxShadow: '0 10px 0 #000',
+    }}>#{num}</div>
+  );
+};
+
+const BleepOverlay: React.FC<{ tl: Timeline }> = ({ tl }) => {
+  const frame = useCurrentFrame();
+  if (!bleepActive(tl, frame / FPS)) return null;
+  return <Censor x={540} y={1000} w={520} />;
 };
 
 /** Camera shake on heavy SFX hits (booms) */
@@ -84,6 +111,8 @@ export const Main: React.FC<{ timeline: Timeline }> = ({ timeline: tl }) => {
         })}
       </AbsoluteFill>
       <Hud tl={tl} />
+      <ListNum tl={tl} />
+      <BleepOverlay tl={tl} />
       <Subtitles tl={tl} hidden={hidden} />
     </AbsoluteFill>
   );
