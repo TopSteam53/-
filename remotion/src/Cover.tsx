@@ -52,7 +52,7 @@ export const Cover: React.FC<{ cover: any }> = ({ cover: c }) => {
           </div>
         </div>
       )}
-      {c.emoji && <div style={{ position: 'absolute', left: 70, top: 1270, fontSize: 150, fontFamily: FONT.emoji, transform: 'rotate(14deg)' }}>{c.emoji}</div>}
+      {c.emoji && <div style={{ position: 'absolute', right: 90, top: 1255, fontSize: 140, fontFamily: FONT.emoji, transform: 'rotate(14deg)' }}>{c.emoji}</div>}
       <div style={{ position: 'absolute', top: 1420, width: '100%', textAlign: 'center', fontFamily: FONT.title, fontWeight: 900, fontSize: 46, color: '#fff', ...stroke(6) }}>{c.series}</div>
       <Vignette strength={0.55} />
     </AbsoluteFill>

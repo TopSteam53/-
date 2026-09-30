@@ -82,7 +82,7 @@ export const Chat: React.FC<{ ctx: ShotCtx }> = ({ ctx }) => {
       <Grid />
       <div style={{
         position: 'absolute', left: 50, right: 90, top: 330, height: 790, borderRadius: 44, background: 'rgba(20,16,42,0.92)',
-        border: '3px solid #3A3170', boxShadow: '0 30px 80px rgba(0,0,0,0.5)', overflow: 'hidden', transform: `translateX(${shake}px) scale(${p.scale || 1})`, transformOrigin: '50% 85%',
+        border: '3px solid #3A3170', boxShadow: '0 30px 80px rgba(0,0,0,0.5)', overflow: 'hidden', transform: `translateX(${shake}px) scale(${p.scale || 1})`, transformOrigin: p.origin || '50% 85%',
       }}>
         <div style={{ height: 96, display: 'flex', alignItems: 'center', gap: 18, padding: '0 34px', borderBottom: '2px solid #3A3170', fontFamily: FONT.body, color: '#fff' }}>
           <div style={{ width: 54, height: 54, borderRadius: 27, background: 'linear-gradient(135deg,#35F2B0,#4DA3FF)', display: 'grid', placeItems: 'center', fontSize: 30 }}>✦</div>
